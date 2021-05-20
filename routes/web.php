@@ -22,7 +22,10 @@ Route::group(['namespace' => 'API'], function(){
 
     Route::get('new_login', 'AuthController@new_login');
 
+    Route::post('vuelogin', 'AuthController@vuelogin');
+
 });
+
 
 Route::view('/', 'home');
 

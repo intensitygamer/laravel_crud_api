@@ -30,6 +30,23 @@ class AuthController extends Controller
 
         
     }
+    
+    public function vuelogin(Request $request)
+    {
+        if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){ 
+          $user                  = Auth::user();
+          $username = $user->name;
+          return response()->json([
+            'status'   => 'success',
+            'user' => $username,
+          ]); 
+        } else { 
+          return response()->json([
+            'status' => 'error',
+            'user'   => 'Unauthorized Access'
+          ]); 
+        } 
+    }
 
     public function logout (Request $request) {
         $token = $request->user()->token();
