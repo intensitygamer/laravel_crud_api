@@ -35,8 +35,10 @@ Route::group(
     
 
     Route::post('login', 'AuthController@login');
+    
+    Route::post('admin_login', 'AuthController@admin_login');
 
-    Route::group([  'middleware'=>'auth:api'], function() {
+    //Route::group([  'middleware'=>'auth:api'], function() {
 
         Route::post('user', 'UserController@store');
         Route::get('users', 'UserController@index');
@@ -44,11 +46,10 @@ Route::group(
         Route::put('user/{id}', 'UserController@update');
         Route::delete('user/{id}', 'UserController@destroy');
 
-             
-        Route::post('logout', 'AuthController@logout');
+        Route::get('logout', 'AuthController@logout');
 
 
-    });
+  //  });
  
 });
  

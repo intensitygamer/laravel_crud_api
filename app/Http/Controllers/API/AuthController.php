@@ -6,14 +6,13 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-
+use Auth;
 
 class AuthController extends Controller
 {
     //
 
-    public function login(Request $request)
-    {   
+    public function login(Request $request){   
  
         $loginData = $request->validate([
             'email' => 'email|required',
@@ -31,15 +30,21 @@ class AuthController extends Controller
         
     }
     
-    public function vuelogin(Request $request)
-    {
-        if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){ 
-          $user                  = Auth::user();
-          $username = $user->name;
+    public function admin_login(Request $request){
+
+        if(Auth::attempt(['email' => $request->email, 'password' => $request->password, 'user_type_id' => 2])) { 
+        
+          $user = Auth::user();
+         
+          $email = $user->email;
+          $user_type_id = $user->user_type_id;
+        
           return response()->json([
             'status'   => 'success',
-            'user' => $username,
+            'user' => $email,
+            'user_type_id' => $user_type_id,
           ]); 
+
         } else { 
           return response()->json([
             'status' => 'error',

@@ -29,4 +29,6 @@ Route::group(['namespace' => 'API'], function(){
 
 Route::view('/', 'home');
 
+Route::view('/login', 'login');
+
 //Auth::routes();

@@ -1,15 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
+<template>
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Admin</title>
-    <link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
-    <!-- <link href="{{ asset('css/shop-homepage.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/loading.css') }}" rel="stylesheet"> -->
-</head>
-<body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
         <a class="navbar-brand" href="/">Admin Users</a>
@@ -41,16 +31,8 @@
          <a class='btn btn-danger' href="api/logout"> Logout </a>
     </div>
 </nav>
+    
+    <router-view></router-view>
 
-<div id="app">
-    <admin-users-page></admin-users-page>
-</div>
 
-<footer class="footer py-5 bg-dark">
-    <div class="container">
-     </div>
-</footer>
-
-<script src="{{ mix('js/app.js') }}"></script>
-</body>
-</html>
+</template>

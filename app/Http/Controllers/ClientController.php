@@ -15,8 +15,7 @@ class ClientController extends Controller
         
         $user   =   Auth::create();
         
-
-        $accessToken = $user->createToken('authToken')->accessToken;
+         $accessToken = $user->createToken('authToken')->accessToken;
 
         return response(['user' => $user, 'access_token' => $accessToken], 201);
     }
