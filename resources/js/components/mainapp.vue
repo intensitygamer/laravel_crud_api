@@ -23,16 +23,16 @@
                     <a class="nav-link" href="#">Staffs</a>
                 </li>
 
-                </li>
-                
+                 
             </ul>
         </div>
 
          <a class='btn btn-danger' href="api/logout"> Logout </a>
     </div>
-</nav>
     
-    <router-view></router-view>
+        <router-view/>
 
+</nav>
 
+  
 </template>

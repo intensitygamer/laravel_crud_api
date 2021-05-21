@@ -6,7 +6,8 @@
 
 require('./bootstrap');
 
-window.Vue = require('vue').default;
+window.Vue = require('vue')
+import router from './router'
 
 /**
  * The following block of code may be used to automatically register your
@@ -23,16 +24,20 @@ window.Vue = require('vue').default;
 
 //Vue.component('login-component', require('./components/Login.vue').default);
 
-Vue.component('admin-users-page', require('./pages/AdminUsers.vue').default);
 
-Vue.component('login-page', require('./pages/Login.vue').default);
+//Vue.component('login-page', require('./pages/Login.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
- */
+*/
+
+
+ Vue.component('mainapp', require('./components/mainapp.vue').default);
 
 const app = new Vue({
-    el: '#app',
+    el: '#app',    
+    router,
+
 });
