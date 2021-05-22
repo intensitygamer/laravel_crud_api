@@ -4,9 +4,13 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
+import Vue from 'vue'
+
+  
 require('./bootstrap');
 
 window.Vue = require('vue')
+
 import router from './router'
 
 /**
@@ -34,10 +38,14 @@ import router from './router'
 */
 
 
- Vue.component('mainapp', require('./components/mainapp.vue').default);
+Vue.component('mainapp', require('./components/mainapp.vue').default);
+
+//Vue.component('admin-users-page', require('./pages/AdminUsers.vue').default);
+
+//Vue.component('mainapp', require('./components/mainapp.vue').default);
 
 const app = new Vue({
     el: '#app',    
-    router,
+    router
 
 });

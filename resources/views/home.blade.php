@@ -21,21 +21,20 @@
 
             <ul class="navbar-nav mr-auto">
 
-                <li class="nav-item active">
-                    <a class="nav-link" href="#"> Admin Users <span class="sr-only">(current)</span></a>
-                </li>
+                    <li class="nav-item active">
+                        <router-link to ="/admin_users"> Admin Users </router-link> <span class="sr-only">(current)</span>  
+                    </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Clients</a>
-                </li>
+                    <li class="nav-item">
+                         <router-link to ="/clients"> Clients </router-link>  
+                    </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Staffs</a>
-                </li>
+                    <li class="nav-item">
+                        <router-link to ="/about"> Staffs </router-link>    
+                    </li>
 
-                </li>
-                
-            </ul>
+             </ul>
+
         </div>
 
          <a class='btn btn-danger' href="api/logout"> Logout </a>
@@ -43,7 +42,7 @@
 </nav>
 
 <div id="app">
-    <admin-users-page></admin-users-page>
+    <router-view />
 </div>
 
 <footer class="footer py-5 bg-dark">

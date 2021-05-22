@@ -2119,12 +2119,15 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
 /* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./router */ "./resources/js/router.js");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
+
+
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
@@ -2148,8 +2151,10 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js"
  * or customize the JavaScript scaffolding to fit your unique needs.
 */
 
-Vue.component('mainapp', __webpack_require__(/*! ./components/mainapp.vue */ "./resources/js/components/mainapp.vue").default);
-var app = new Vue({
+vue__WEBPACK_IMPORTED_MODULE_1__.default.component('mainapp', __webpack_require__(/*! ./components/mainapp.vue */ "./resources/js/components/mainapp.vue").default); //Vue.component('admin-users-page', require('./pages/AdminUsers.vue').default);
+//Vue.component('mainapp', require('./components/mainapp.vue').default);
+
+var app = new vue__WEBPACK_IMPORTED_MODULE_1__.default({
   el: '#app',
   router: _router__WEBPACK_IMPORTED_MODULE_0__.default
 });
@@ -2208,12 +2213,16 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
 /* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
 /* harmony import */ var _pages_AdminLogin__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./pages/AdminLogin */ "./resources/js/pages/AdminLogin.vue");
 /* harmony import */ var _pages_AdminUsers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./pages/AdminUsers */ "./resources/js/pages/AdminUsers.vue");
 /* harmony import */ var _pages_ClientDashboard__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./pages/ClientDashboard */ "./resources/js/pages/ClientDashboard.vue");
 /* harmony import */ var _pages_ClientUsers__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./pages/ClientUsers */ "./resources/js/pages/ClientUsers.vue");
+/* provided dependency */ var process = __webpack_require__(/*! process/browser */ "./node_modules/process/browser.js");
 
 
 vue__WEBPACK_IMPORTED_MODULE_0__.default.use(vue_router__WEBPACK_IMPORTED_MODULE_1__.default); // admin project pages
@@ -2240,6 +2249,12 @@ var routes = [//app routes....
   component: _pages_ClientUsers__WEBPACK_IMPORTED_MODULE_5__.default,
   name: 'clientusers'
 }];
+var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__.default({
+  mode: 'history',
+  base: process.env.BASE_URL,
+  routes: routes
+});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (router);
 
 /***/ }),
 
@@ -38705,9 +38720,90 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "nav",
-    { staticClass: "navbar navbar-expand-lg navbar-dark bg-dark fixed-top" },
-    [_vm._m(0), _vm._v(" "), _c("router-view")],
+    "div",
+    { staticClass: "row" },
+    [
+      _c(
+        "nav",
+        {
+          staticClass: "navbar navbar-expand-lg navbar-dark bg-dark fixed-top"
+        },
+        [
+          _c("div", { staticClass: "container" }, [
+            _c("a", { staticClass: "navbar-brand", attrs: { href: "/" } }, [
+              _vm._v("Admin Users")
+            ]),
+            _vm._v(" "),
+            _vm._m(0),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "collapse navbar-collapse",
+                attrs: { id: "navbarSupportedContent" }
+              },
+              [
+                _c("ul", { staticClass: "navbar-nav mr-auto" }, [
+                  _c("li", { staticClass: "nav-item active" }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "nav-link",
+                        attrs: { href: "/admin_users" }
+                      },
+                      [
+                        _c("router-link", { attrs: { to: "/admin_users" } }, [
+                          _vm._v(" Admin Users ")
+                        ]),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "sr-only" }, [
+                          _vm._v("(current)")
+                        ])
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("li", { staticClass: "nav-item" }, [
+                    _c(
+                      "a",
+                      { staticClass: "nav-link", attrs: { href: "/clients" } },
+                      [
+                        _c("router-link", { attrs: { to: "/clients" } }, [
+                          _vm._v(" Clients ")
+                        ])
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("li", { staticClass: "nav-item" }, [
+                    _c(
+                      "a",
+                      { staticClass: "nav-link", attrs: { href: "/about" } },
+                      [
+                        _c("router-link", { attrs: { to: "/about" } }, [
+                          _vm._v(" Staffs ")
+                        ])
+                      ],
+                      1
+                    )
+                  ])
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "a",
+              { staticClass: "btn btn-danger", attrs: { href: "api/logout" } },
+              [_vm._v(" Logout ")]
+            )
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c("router-view")
+    ],
     1
   )
 }
@@ -38716,63 +38812,21 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("a", { staticClass: "navbar-brand", attrs: { href: "/" } }, [
-        _vm._v("Admin Users")
-      ]),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "navbar-toggler",
-          attrs: {
-            type: "button",
-            "data-toggle": "collapse",
-            "data-target": "#navbarResponsive",
-            "aria-controls": "navbarResponsive",
-            "aria-expanded": "false",
-            "aria-label": "Toggle navigation"
-          }
-        },
-        [_c("span", { staticClass: "navbar-toggler-icon" })]
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass: "collapse navbar-collapse",
-          attrs: { id: "navbarSupportedContent" }
-        },
-        [
-          _c("ul", { staticClass: "navbar-nav mr-auto" }, [
-            _c("li", { staticClass: "nav-item active" }, [
-              _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-                _vm._v(" Admin Users "),
-                _c("span", { staticClass: "sr-only" }, [_vm._v("(current)")])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("li", { staticClass: "nav-item" }, [
-              _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-                _vm._v("Clients")
-              ])
-            ]),
-            _vm._v(" "),
-            _c("li", { staticClass: "nav-item" }, [
-              _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-                _vm._v("Staffs")
-              ])
-            ])
-          ])
-        ]
-      ),
-      _vm._v(" "),
-      _c(
-        "a",
-        { staticClass: "btn btn-danger", attrs: { href: "api/logout" } },
-        [_vm._v(" Logout ")]
-      )
-    ])
+    return _c(
+      "button",
+      {
+        staticClass: "navbar-toggler",
+        attrs: {
+          type: "button",
+          "data-toggle": "collapse",
+          "data-target": "#navbarResponsive",
+          "aria-controls": "navbarResponsive",
+          "aria-expanded": "false",
+          "aria-label": "Toggle navigation"
+        }
+      },
+      [_c("span", { staticClass: "navbar-toggler-icon" })]
+    )
   }
 ]
 render._withStripped = true
@@ -38924,11 +38978,9 @@ var render = function() {
           [
             _c("h4", [_vm._v("Admin Users")]),
             _vm._v(" "),
-            _c(
-              "button",
-              { staticClass: "btn btn-info", on: { click: _vm.create_admin } },
-              [_vm._v(" Create Admin ")]
-            ),
+            _c("button", { staticClass: "btn btn-info" }, [
+              _vm._v(" Create Admin ")
+            ]),
             _vm._v(" "),
             _c(
               "table",

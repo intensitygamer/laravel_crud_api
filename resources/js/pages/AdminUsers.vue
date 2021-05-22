@@ -6,7 +6,7 @@
  
                         <h4>Admin Users</h4>
 
-                        <button class="btn btn-info" @click=create_admin> Create Admin </button>
+                        <button class="btn btn-info"> Create Admin </button>
  
                         <table class="table table-striped" >
                                 <tr>
