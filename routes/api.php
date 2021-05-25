@@ -46,9 +46,23 @@ Route::group(
         Route::put('user/{id}', 'UserController@update');
         Route::delete('user/{id}', 'UserController@destroy');
 
+        Route::post('user', 'UserController@store');
+
+
+
+        Route::get('staffs', 'StaffController@index');
+        Route::post('staff', 'StaffController@store');
+        Route::get('staff/{id}', 'StaffController@show');
+        Route::put('staff/{id}', 'StaffController@update');
+        Route::delete('staff/{id}', 'StaffController@destroy');
+
+ 
+
+        Route::get('admin', 'UserController@show_admins');
+
         Route::get('logout', 'AuthController@logout');
 
-
+        
   //  });
  
 });

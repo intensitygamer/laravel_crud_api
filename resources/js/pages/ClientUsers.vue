@@ -1,12 +1,12 @@
 <template>
-    <div class="container">
+    <div class="container"  style="margin-top: 50px;">
         <div class="row">
-            <div class="col-lg-9">
-                <div class="row mt-4"  :class="{'loading': loading}">
+            <div class="col-lg-9" >
+                <div class="row mt-4" >
  
                         <h4>Client Users</h4>
 
-                        <button class="btn btn-info"> Create Client User </button>
+                        <br><button class="btn btn-info" > <router-link to ="/createClient"> Create Client User </router-link> </button><br>
  
                         <table class="table table-striped" >
                                 <tr>
@@ -24,7 +24,9 @@
                                 <td>{{user.email}} </td>
                                 <td> 
                                     <button class="btn btn-success"> Change Password </button>
+                                    <button class="btn btn-success"> Update Client </button>
                                     <button class="btn btn-danger"> Deactivate </button>
+
                                 </td>
                             </tr>
 

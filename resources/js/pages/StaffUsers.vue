@@ -4,24 +4,24 @@
             <div class="col-lg-9">
                 <div class="row mt-4"  :class="{'loading': loading}">
  
-                        <h4>Admin Users</h4>
+                        <h4>Staffs</h4>
 
-                        <br><button class="btn btn-info"> Create Admin </button><br>
+                        <button class="btn btn-info"> Create Staff User </button>
  
                         <table class="table table-striped" >
                                 <tr>
                                     <td>ID </td>
                                     <td>Email </td> 
                                     <td>Name </td>
+                                    <td>URL </td>
                                     <td>Status </td>
-                                    <td>Action </td>
 
                                 </tr>
-                            <tr v-for="user in users" v-bind:key="user" >
-                                <td>{{user.id}} </td>
-                                <td>{{user.first_name}} </td>
-                                <td>{{user.last_name}} </td>
-                                <td>{{user.email}} </td>
+                            <tr v-for="staff in staffs" v-bind:key="staff" >
+                                <td>{{staffs.id}} </td>
+                                <td>{{staffs.first_name}} </td>
+                                <td>{{staffs.last_name}} </td>
+                                <td>{{staffs.email}} </td>
                                 <td> 
                                     <button class="btn btn-success"> Change Password </button>
                                     <button class="btn btn-danger"> Deactivate </button>
@@ -52,7 +52,7 @@
 
         methods: {
             loadAdminUsers: function () {
-                axios.get('/api/users')
+                axios.get('/api/staffs')
                     .then((response) => {
                         this.users = response.data.users;
                         this.loading = false;

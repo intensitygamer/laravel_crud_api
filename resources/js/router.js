@@ -7,7 +7,12 @@ Vue.use(Router)
 import adminlogin from './pages/AdminLogin'
 import adminusers from './pages/AdminUsers'
 import clientdashboard from './pages/ClientDashboard'
+
+
 import clientusers from './pages/ClientUsers'
+import createClient from './pages/createClient'
+
+import staffusers from './pages/StaffUsers'
 
 
 
@@ -33,10 +38,30 @@ const routes = [
         name: 'adminusers'
 
     },    
+
+    /* Client CRUD */
+
     {
         path: '/clientusers',
         component: clientusers,
         name: 'clientusers'
+
+    },  
+    
+    {
+        path: '/createClient',
+        component: createClient,
+        name: 'createClient'
+
+    },
+
+
+
+
+    {
+        path: '/staffusers',
+        component: staffusers,
+        name: 'staffusers'
 
     },
 ]

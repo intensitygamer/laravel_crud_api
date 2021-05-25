@@ -4,57 +4,48 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\User;
+
+use App\Models\Client;
 use App\Http\Controllers\API\BaseController as BaseController;
-use Validator;
-use App\Http\Resources\User as UserResource;
+    
 use Illuminate\Support\Facades\Hash;
 
-class UserController extends BaseController
+use Validator;
+use App\Http\Resources\Client as ClientResource;
+
+
+
+class ClientController extends Controller
 {
     //
-
-    public function index(){
-
-        
-        //$user        = Auth::user();
- 
-        // $users   = User::all("user_type_id", 2);
- 
-         $users   = User::all();
- 
-         return response(['users' => $users], 201);
-  
-     }
-
-     
-    /**
-     * Display the specified resource.
+       /**
+     * Display a listing of the resource.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function index()
     {
-        $user = User::find($id);
-        
-        if (is_null($user)) {
+        //
+         
+        $users = User::where('user_type_id' , 2)->get();
+ 
+        if (is_null($users)) {
             return $this->sendError('User not found.');
         }
-   
-        return $this->sendResponse(new UserResource($user), 'User retrieved successfully.');
-    }   
- 
 
-     /**
+        return response(['users' => $users], 201);
+
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-
-     public function store(Request $request)
+    public function store(Request $request)
     {
+        //
         $input = $request->all();
    
         $validator = Validator::make($input, [
@@ -65,6 +56,7 @@ class UserController extends BaseController
         ]);
         
         $input['password'] = Hash::make($input['password']);
+        $input['user_type_id'] = 2;
 
         if($validator->fails()){
             return $this->sendError('Validation Error.', $validator->errors());       
@@ -72,18 +64,39 @@ class UserController extends BaseController
    
         $user = User::create($input);
    
-        return $this->sendResponse(new UserResource($user), 'User created successfully.');
-    } 
+        return $this->sendResponse(new UserResource($user), 'Staff created successfully.');
+
+
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Admin  $admin
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Admin $admin)
+    {
+        //
+        $user = User::find($id);
+        
+        if (is_null($user)) {
+            return $this->sendError('User not found.');
+        }
+   
+        return $this->sendResponse(new UserResource($user), 'User retrieved successfully.');
+    }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Admin  $admin
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Admin $admin)
     {
+        //
         $input = $request->all();
         $user = new User();
 
@@ -109,17 +122,20 @@ class UserController extends BaseController
         return $this->sendResponse(new UserResource($user), 'User updated successfully.');
     }
 
- /**
+    /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Admin  $admin
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(Admin $admin)
     {
+        //
         $user->delete();
    
         return $this->sendResponse([], 'User deleted successfully.');
+
     }
+
 
 }

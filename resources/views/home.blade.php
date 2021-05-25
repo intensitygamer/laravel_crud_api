@@ -10,6 +10,7 @@
     <link href="{{ asset('css/loading.css') }}" rel="stylesheet"> -->
 </head>
 <body>
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
         <a class="navbar-brand" href="/">Admin Users</a>
@@ -17,33 +18,16 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
-            <ul class="navbar-nav mr-auto">
-
-                    <li class="nav-item active">
-                        <router-link to ="/admin_users"> Admin Users </router-link> <span class="sr-only">(current)</span>  
-                    </li>
-
-                    <li class="nav-item">
-                         <router-link to ="/clients"> Clients </router-link>  
-                    </li>
-
-                    <li class="nav-item">
-                        <router-link to ="/about"> Staffs </router-link>    
-                    </li>
-
-             </ul>
-
-        </div>
 
          <a class='btn btn-danger' href="api/logout"> Logout </a>
     </div>
 </nav>
 
-<div id="app">
-    <router-view />
-</div>
+<div id="app">  
+
+    <mainapp></mainapp>
+
+ </div>
 
 <footer class="footer py-5 bg-dark">
     <div class="container">
