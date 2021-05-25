@@ -16,15 +16,15 @@
                         <ul class="navbar-nav mr-auto">
 
                             <li class="nav-item active">
-                                <router-link to ="/admin_users" :class="[nav-link]"> Admin Users </router-link> <span class="sr-only">(current)</span>
+                                <router-link to ="/admin_users" class="[nav-link]"> Admin Users </router-link> <span class="sr-only">(current)</span>
                             </li>
 
                             <li class="nav-item">
-                                <router-link to ="/clientusers" :class="[nav-link]"> Clients </router-link>
+                                <router-link to ="/clientusers" class="[nav-link]"> Clients </router-link>
                             </li>
 
                             <li class="nav-item">
-                                <router-link to ="/staffusers" :class="[nav-link]"> Staffs </router-link>
+                                <router-link to ="/staffusers" class="[nav-link]"> Staffs </router-link>
                             </li>
                         </ul>
                         

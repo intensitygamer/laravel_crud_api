@@ -39432,7 +39432,7 @@ var render = function() {
                       _c(
                         "router-link",
                         {
-                          class: [_vm.nav - _vm.link],
+                          staticClass: "[nav-link]",
                           attrs: { to: "/admin_users" }
                         },
                         [_vm._v(" Admin Users ")]
@@ -39452,7 +39452,7 @@ var render = function() {
                       _c(
                         "router-link",
                         {
-                          class: [_vm.nav - _vm.link],
+                          staticClass: "[nav-link]",
                           attrs: { to: "/clientusers" }
                         },
                         [_vm._v(" Clients ")]
@@ -39468,7 +39468,7 @@ var render = function() {
                       _c(
                         "router-link",
                         {
-                          class: [_vm.nav - _vm.link],
+                          staticClass: "[nav-link]",
                           attrs: { to: "/staffusers" }
                         },
                         [_vm._v(" Staffs ")]
@@ -39791,7 +39791,7 @@ var render = function() {
                     _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(user.last_name) + " ")]),
                     _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(user.email) + " ")]),
+                    _c("td", [_vm._v(_vm._s(user.url) + " ")]),
                     _vm._v(" "),
                     _vm._m(1, true)
                   ])

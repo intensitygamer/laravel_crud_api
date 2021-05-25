@@ -21,7 +21,7 @@
                                 <td>{{user.id}} </td>
                                 <td>{{user.first_name}} </td>
                                 <td>{{user.last_name}} </td>
-                                <td>{{user.email}} </td>
+                                <td>{{user.crm_url}} </td>
                                 <td> 
                                     <button class="btn btn-success"> Change Password </button>
                                     <button class="btn btn-success"> Update Client </button>
