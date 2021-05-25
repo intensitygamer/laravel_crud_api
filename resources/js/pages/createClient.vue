@@ -76,7 +76,7 @@
 
                 
                 <div class="form-control">
-                    <Button @click="save" :disabled="isCreating" class="btn btn-primary">Save</Button>
+                    <Button @click="onSave" :disabled="isCreating" class="btn btn-primary">Save</Button>
                 </div>
             
             </div>
@@ -103,6 +103,13 @@ export default {
 				email  : '',
 				username  : '',
 				password : '',
+				address : '',
+				street : '',
+				house_no : '',
+				city : '',
+				territory : '',
+				postal_code : '',
+				country : '',
 				jsonData: null
 
 			},
@@ -120,14 +127,12 @@ export default {
             var data = response
             this.data.jsonData = JSON.stringify(data)
  
-            if(this.data.user_type_id.trim()=='') return this.e('User Type is required')
-            if(this.data.first_name.trim()=='') return this.e('First Name is required')
-            if(this.data.last_name.trim()=='') return this.e('Last Name is required')
-            if(this.data.email.trim()=='') return this.e('Email is required')
-            if(this.data.password.trim()=='') return this.e('Password is required')
-            if(this.data.password.trim()=='') return this.e('Password is required')
-            if(this.data.password.trim()=='') return this.e('Password is required')
-
+            //if(this.data.user_type_id.trim()=='') return this.e('User Type is required')
+            // if(this.data.first_name.trim()=='') return this.e('First Name is required')
+            // if(this.data.last_name.trim()=='') return this.e('Last Name is required')
+            // if(this.data.email.trim()=='') return this.e('Email is required')
+            // if(this.data.password.trim()=='') return this.e('Password is required')
+    
 			this.isCreating = true
 
 			const res = await this.callApi('post', 'api/client', this.data)
@@ -135,7 +140,7 @@ export default {
 			if(res.status===200){
 				this.s('Client has been created successfully!')
                 // redirect...
-                this.$router.push('/clients')
+                this.$router.push('/users')
 
 			}else{
                  

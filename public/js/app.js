@@ -2370,6 +2370,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         email: '',
         username: '',
         password: '',
+        address: '',
+        street: '',
+        house_no: '',
+        city: '',
+        territory: '',
+        postal_code: '',
+        country: '',
         jsonData: null
       },
       initData: null,
@@ -2387,76 +2394,24 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 data = response;
-                _this.data.jsonData = JSON.stringify(data);
+                _this.data.jsonData = JSON.stringify(data); //if(this.data.user_type_id.trim()=='') return this.e('User Type is required')
+                // if(this.data.first_name.trim()=='') return this.e('First Name is required')
+                // if(this.data.last_name.trim()=='') return this.e('Last Name is required')
+                // if(this.data.email.trim()=='') return this.e('Email is required')
+                // if(this.data.password.trim()=='') return this.e('Password is required')
 
-                if (!(_this.data.user_type_id.trim() == '')) {
-                  _context.next = 4;
-                  break;
-                }
-
-                return _context.abrupt("return", _this.e('User Type is required'));
-
-              case 4:
-                if (!(_this.data.first_name.trim() == '')) {
-                  _context.next = 6;
-                  break;
-                }
-
-                return _context.abrupt("return", _this.e('First Name is required'));
-
-              case 6:
-                if (!(_this.data.last_name.trim() == '')) {
-                  _context.next = 8;
-                  break;
-                }
-
-                return _context.abrupt("return", _this.e('Last Name is required'));
-
-              case 8:
-                if (!(_this.data.email.trim() == '')) {
-                  _context.next = 10;
-                  break;
-                }
-
-                return _context.abrupt("return", _this.e('Email is required'));
-
-              case 10:
-                if (!(_this.data.password.trim() == '')) {
-                  _context.next = 12;
-                  break;
-                }
-
-                return _context.abrupt("return", _this.e('Password is required'));
-
-              case 12:
-                if (!(_this.data.password.trim() == '')) {
-                  _context.next = 14;
-                  break;
-                }
-
-                return _context.abrupt("return", _this.e('Password is required'));
-
-              case 14:
-                if (!(_this.data.password.trim() == '')) {
-                  _context.next = 16;
-                  break;
-                }
-
-                return _context.abrupt("return", _this.e('Password is required'));
-
-              case 16:
                 _this.isCreating = true;
-                _context.next = 19;
+                _context.next = 5;
                 return _this.callApi('post', 'api/client', _this.data);
 
-              case 19:
+              case 5:
                 res = _context.sent;
 
                 if (res.status === 200) {
                   _this.s('Client has been created successfully!'); // redirect...
 
 
-                  _this.$router.push('/clients');
+                  _this.$router.push('/users');
                 } else {
                   if (res.status == 422) {
                     for (i in res.data.errors) {
@@ -2469,7 +2424,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 _this.isCreating = false;
 
-              case 22:
+              case 8:
               case "end":
                 return _context.stop();
             }
@@ -39791,7 +39746,7 @@ var render = function() {
                     _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(user.last_name) + " ")]),
                     _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(user.url) + " ")]),
+                    _c("td", [_vm._v(_vm._s(user.crm_url) + " ")]),
                     _vm._v(" "),
                     _vm._m(1, true)
                   ])
@@ -40173,7 +40128,7 @@ var render = function() {
                 {
                   staticClass: "btn btn-primary",
                   attrs: { disabled: _vm.isCreating },
-                  on: { click: _vm.save }
+                  on: { click: _vm.onSave }
                 },
                 [_vm._v("Save")]
               )
