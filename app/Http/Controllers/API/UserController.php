@@ -63,16 +63,21 @@ class UserController extends BaseController
             'email' => 'required',
             'password' => 'required'
         ]);
-        
-        $input['password'] = Hash::make($input['password']);
-
+         
+        $user['password']       = Hash::make($input['password']);
+        $user['user_type_id']   = 2;
+        $user['first_name']     = $input['first_name'];
+        $user['last_name']      = $input['last_name'];
+        $user['email']          = $input['email'];
+         
         if($validator->fails()){
             return $this->sendError('Validation Error.', $validator->errors());       
         }
    
-        $user = User::create($input);
-   
-        return $this->sendResponse(new UserResource($user), 'User created successfully.');
+        $user = User::create($user);
+        
+ 
+        //return $this->sendResponse(new UserResource($user), 'User created successfully.');
     } 
 
     /**

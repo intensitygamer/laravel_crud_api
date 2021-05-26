@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\Client;
+use App\Models\User;
+use App\Models\UserDetails;
 use App\Http\Controllers\API\BaseController as BaseController;
     
 use Illuminate\Support\Facades\Hash;
@@ -55,16 +57,31 @@ class ClientController extends Controller
             'password' => 'required'
         ]);
         
-        $input['password'] = Hash::make($input['password']);
-        $input['user_type_id'] = 2;
+        $user['password']       = Hash::make($input['password']);
+        $user['user_type_id']   = 2;
+        $user['first_name']     = $input['first_name'];
+        $user['last_name']      = $input['last_name'];
+        $user['email']          = $input['email'];
+        
 
+    
         if($validator->fails()){
             return $this->sendError('Validation Error.', $validator->errors());       
         }
    
-        $user = User::create($input);
-   
-        return $this->sendResponse(new UserResource($user), 'Staff created successfully.');
+        $user_result           = User::create($user);
+        
+        print_r($user_result);
+
+        // $user_details['user_id']        = $input['user_id'];
+        // $user_details['email']          = $input['email'];
+        // $user_details['email']          = $input['email'];
+
+        //$user_details   = UserDetails::create($user_details);
+ 
+
+
+       // return $this->sendResponse(new UserResource($user_result), 'Staff created successfully.');
 
 
     }

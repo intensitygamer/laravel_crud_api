@@ -48,7 +48,7 @@ export default {
             this.isLogging = true
 
 
-            const res = await this.callApi('post', 'api/admin_login', this.data)
+            //const res = await this.callApi('post', 'api/admin_login', this.data)
             if(res.status === 200){
                
                this.s(res.data.msg)

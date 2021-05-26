@@ -27,6 +27,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+
 Route::group(
     [   'namespace' => 'API',
         //'middleware'=>'api', 
@@ -40,7 +41,7 @@ Route::group(
 
     //Route::group([  'middleware'=>'auth:api'], function() {
 
-        Route::post('user', 'UserController@store');
+       // Route::post('user', 'UserController@store');
         Route::get('users', 'UserController@index');
         Route::get('user/{id}', 'UserController@show');
         Route::put('user/{id}', 'UserController@update');
@@ -55,8 +56,11 @@ Route::group(
         Route::get('staff/{id}', 'StaffController@show');
         Route::put('staff/{id}', 'StaffController@update');
         Route::delete('staff/{id}', 'StaffController@destroy');
+       
+        Route::post('client', 'ClientController@store');
+        
+        //Route::post('client', 'ClientController@store');
 
- 
 
         Route::get('admin', 'UserController@show_admins');
 

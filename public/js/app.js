@@ -1968,7 +1968,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        var res, i;
+        var i;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -1976,12 +1976,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 //if(this.data.email.trim()=='') return this.e('Email is required')
                 //if(this.data.password.trim()=='') return this.e('Password is required')
                 //if(this.data.password.length < 6) return this.e('Incorrect login details')
-                _this.isLogging = true;
-                _context.next = 3;
-                return _this.callApi('post', 'api/admin_login', _this.data);
-
-              case 3:
-                res = _context.sent;
+                _this.isLogging = true; //const res = await this.callApi('post', 'api/admin_login', this.data)
 
                 if (res.status === 200) {
                   _this.s(res.data.msg);
@@ -2001,7 +1996,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 _this.isLogging = false;
 
-              case 6:
+              case 3:
               case "end":
                 return _context.stop();
             }
@@ -2377,7 +2372,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         territory: '',
         postal_code: '',
         country: '',
-        jsonData: null
+        jsonData: null,
+        clientID: '',
+        info: ''
       },
       initData: null,
       isCreating: false
@@ -2388,43 +2385,44 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        var data, res, i;
+        var data, i;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 data = response;
-                _this.data.jsonData = JSON.stringify(data); //if(this.data.user_type_id.trim()=='') return this.e('User Type is required')
+                _this.data.jsonData = JSON.stringify(data);
+                console.log(data); //if(this.data.user_type_id.trim()=='') return this.e('User Type    is required')
                 // if(this.data.first_name.trim()=='') return this.e('First Name is required')
                 // if(this.data.last_name.trim()=='') return this.e('Last Name is required')
                 // if(this.data.email.trim()=='') return this.e('Email is required')
                 // if(this.data.password.trim()=='') return this.e('Password is required')
+                //this.isCreating = true
 
-                _this.isCreating = true;
-                _context.next = 5;
-                return _this.callApi('post', 'api/client', _this.data);
+                axios.post('http://schedeasy_clients.local/api/user', data).then(function (response) {
+                  _this.data.info = response;
+                })["catch"](function (error) {
+                  console.log(error);
+                  _this.errored = true;
+                });
+                console.log(_this.data.info); //this.data.clientID = response.data.id;
+                //const res = await this.callApi('post', 'api/client', this.data)
 
-              case 5:
-                res = _context.sent;
-
-                if (res.status === 200) {
+                if (response.status === 200) {
                   _this.s('Client has been created successfully!'); // redirect...
+                  //this.$router.push('/users')
 
-
-                  _this.$router.push('/users');
                 } else {
-                  if (res.status == 422) {
-                    for (i in res.data.errors) {
-                      _this.e(res.data.errors[i][0]);
+                  if (response.status == 422) {
+                    for (i in response.data.errors) {// this.e(res.data.errors[i][0])
                     }
-                  } else {
-                    _this.swr();
-                  }
+                  } else {//this.swr()
+                    }
                 }
 
                 _this.isCreating = false;
 
-              case 8:
+              case 7:
               case "end":
                 return _context.stop();
             }

@@ -110,8 +110,9 @@ export default {
 				territory : '',
 				postal_code : '',
 				country : '',
-				jsonData: null
-
+				jsonData: null,
+                clientID: '',
+                info: '',
 			},
             initData: null,
 			isCreating: false,
@@ -124,34 +125,54 @@ export default {
 
         async onSave(response){
            
-            var data = response
-            this.data.jsonData = JSON.stringify(data)
- 
-            //if(this.data.user_type_id.trim()=='') return this.e('User Type is required')
+           var data = response
+
+           this.data.jsonData = JSON.stringify(data)
+            
+            console.log(data);
+
+            //if(this.data.user_type_id.trim()=='') return this.e('User Type    is required')
             // if(this.data.first_name.trim()=='') return this.e('First Name is required')
             // if(this.data.last_name.trim()=='') return this.e('Last Name is required')
             // if(this.data.email.trim()=='') return this.e('Email is required')
             // if(this.data.password.trim()=='') return this.e('Password is required')
     
-			this.isCreating = true
+			//this.isCreating = true
+            
+            axios.post('http://schedeasy_clients.local/api/user', data).then(response => {
+                
+                this.data.info = response
+           
+            }).catch(error => {
+            
+                console.log(error)
+                this.errored = true
+            
+            })
 
-			const res = await this.callApi('post', 'api/client', this.data)
+            
+            console.log(this.data.info);
 
-			if(res.status===200){
+ 
+            //this.data.clientID = response.data.id;
+
+            //const res = await this.callApi('post', 'api/client', this.data)
+
+			if(response.status === 200){
 				this.s('Client has been created successfully!')
                 // redirect...
-                this.$router.push('/users')
+                //this.$router.push('/users')
 
 			}else{
                  
-                if(res.status==422){
+                if(response.status==422){
 
-                    for(let i in res.data.errors){
-                        this.e(res.data.errors[i][0])
+                    for(let i in response.data.errors){
+                       // this.e(res.data.errors[i][0])
                     }
 
                 }else{
-                    this.swr()
+                    //this.swr()
                 }
 
 			}
