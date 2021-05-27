@@ -4,31 +4,42 @@ namespace App\Http\Controllers;
 
 use App\Models\Client;
 use App\Models\User;
+use App\Models\UserDetails;
 use Illuminate\Http\Request;
+use Validator;
+use Illuminate\Support\Facades\Hash;
 
-class ClientController extends Controller
+use App\Http\Controllers\API\BaseController as BaseController;
+
+class ClientController extends BaseController
 {
-
-
-    public function create_client(Request $request)
-    {
-        
-        $user   =   Auth::create();
-        
-         $accessToken = $user->createToken('authToken')->accessToken;
-
-        return response(['user' => $user, 'access_token' => $accessToken], 201);
-    }
-
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {   
         //
+       // return view('clients.create');
     }
+
+    
+    public function create_client(Request $request)
+    {
+        
+        return view('clients.create');
+
+    }
+
+    
+    public function update_client_form(Request $request)
+    {
+        
+        return view('clients.update');
+
+    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -39,6 +50,47 @@ class ClientController extends Controller
     public function store(Request $request)
     {
         //
+
+        $input          = $request->all();
+        //$user_details   = new UserDetails();
+        $user           = new User();
+ 
+
+        $validator = Validator::make($input, [
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'email' => 'required|unique:users',
+            'password' => 'required'
+        ]);
+        
+        if($validator->fails()){
+
+            return view('clients.create')->with('errors', $validator->errors() );
+
+        }
+
+        $user_inputs['email']          = $input["email"];
+        $user_inputs['password']       = Hash::make($input['password']);
+        $user_inputs['first_name']     = $input['first_name'];
+        $user_inputs['last_name']      = $input['last_name'];
+        $user_inputs['user_type_id']   = 2;
+
+        $user_result                   = User::create($user_inputs);
+        $user_id                       = $user_result->id;
+
+        $user_details['user_id']        = $user_result->id ;
+        $user_details['address']        = $input['address']  ;
+        $user_details['street']        = $input['street']  ;
+        $user_details['house_no']       = $input['house_no'] ;
+        $user_details['city']           = $input['city'] ;
+        $user_details['territory']      = $input['territory'] ;
+        $user_details['postal_code']    = $input['postal_code'] ;
+        $user_details['country']        = $input['country'] ;
+ 
+        UserDetails::create($user_details);
+
+        return view('clients.index');
+
     }
 
     /**

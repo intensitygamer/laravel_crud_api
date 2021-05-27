@@ -10,9 +10,10 @@
 <body>
 
 <div class = 'row'>
-    <div class = 'container'>    
+    <div class = 'container'>  
+
         
-        <h2>User Login</h2>
+        <h2>Admin Login</h2>
 
         <form action="{{ route('login') }}" method="POST" >
             <div class="form-group">
@@ -28,8 +29,9 @@
             <input type='submit' class='btn btn-primary' value = "Login">
 
         </form>
-        
+    
     </div>
+
 </div>
 
 </body>

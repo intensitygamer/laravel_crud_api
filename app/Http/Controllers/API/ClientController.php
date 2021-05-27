@@ -35,6 +35,7 @@ class ClientController extends Controller
             return $this->sendError('User not found.');
         }
 
+
         return response(['users' => $users], 201);
 
     }
@@ -73,17 +74,6 @@ class ClientController extends Controller
         
         print_r($user_result);
 
-        // $user_details['user_id']        = $input['user_id'];
-        // $user_details['email']          = $input['email'];
-        // $user_details['email']          = $input['email'];
-
-        //$user_details   = UserDetails::create($user_details);
- 
-
-
-       // return $this->sendResponse(new UserResource($user_result), 'Staff created successfully.');
-
-
     }
 
     /**
@@ -114,8 +104,9 @@ class ClientController extends Controller
     public function update(Request $request, Admin $admin)
     {
         //
-        $input = $request->all();
-        $user = new User();
+        $input          = $request->all();
+        $user           = new User();
+        $user_details   = new UserDetails();
 
         $validator = Validator::make($input, [
             'first_name' => 'required',
@@ -135,6 +126,7 @@ class ClientController extends Controller
         $user->user_type_id = $input['user_type_id'];
 
         $user->save();
+  
    
         return $this->sendResponse(new UserResource($user), 'User updated successfully.');
     }
