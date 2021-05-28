@@ -31,31 +31,56 @@ Route::get('/', function () {
 
 Auth::routes();
 
+/* Client Login */
+
 Route::get('/login', function () {
     return view('auth.login');
 }); 
 
 Route::post('login', [ 'as' => 'login', 'uses' => 'AuthController@login']);
 
+Route::middleware('check.is.admin')->group(function(){
 
-/* Client */
+    /* Client */
 
-Route::get('create_client', [ 'as' => 'client', 'uses' => 'ClientController@create_client']);
-Route::post('save_client', [ 'as' => 'save_client', 'uses' => 'ClientController@store']);
-Route::get('update_client', [ 'as' => 'update_client', 'uses' => 'ClientController@update_client_form']);
-Route::post('update_client', [ 'as' => 'update_client', 'uses' => 'ClientController@update']);
-Route::get('clients', [ 'as' => 'clients', 'uses' => 'ClientController@index']);
- 
+    Route::get('create_client', [ 'as' => 'create_client', 'uses' => 'ClientController@create_client']);
+    Route::post('save_client', [ 'as' => 'save_client', 'uses' => 'ClientController@store']);
+    Route::get('update_client', [ 'as' => 'update_client', 'uses' => 'ClientController@update_client_form']);
+    Route::post('update_client', [ 'as' => 'update_client', 'uses' => 'ClientController@update']);
+    Route::get('clients', [ 'as' => 'clients', 'uses' => 'ClientController@index']);
+    Route::post('delete_client', [ 'as' => 'delete_client', 'uses' => 'ClientController@destroy']);
+
+    /* Staffs */
+
+    Route::get('create_staff',  [ 'as' => 'client', 'uses' => 'StaffController@create_client']);
+    Route::post('save_staff',   [ 'as' => 'save_staff', 'uses' => 'StaffController@store']);
+    Route::get('update_staff',  [ 'as' => 'update_staff', 'uses' => 'StaffController@update_staff']);
+    Route::post('update_staff', [ 'as' => 'update_staff', 'uses' => 'StaffController@update']);
+    Route::get('staffs',        [ 'as' => 'staffs', 'uses' => 'StaffController@index']);
 
 
-/* Client */
+    /* Admin */
+
+    Route::get('create_staff',  [ 'as' => 'client', 'uses' => 'Admin@create_client']);
+    Route::post('save_staff',   [ 'as' => 'save_staff', 'uses' => 'AdminController@store']);
+    Route::get('update_staff',  [ 'as' => 'update_staff', 'uses' => 'AdminController@update_staff']);
+    Route::post('update_staff', [ 'as' => 'update_staff', 'uses' => 'AdminController@update']);
+    Route::get('staffs',        [ 'as' => 'staffs', 'uses' => 'AdminController@index']);
+
+
+    
+});
+
+/* Admin Login */
 
 Route::get('/admin_login', function () {
-    return view('admin_login');
+    return view('auth.admin_login');
 }); 
- 
+
+ /* Google Login */
+
 Route::get('redirect', [ 'as' => 'redirect', 'uses' => 'AuthController@redirectToProvider']);
-Route::post('callback', [ 'as' => 'callback', 'uses' => 'AuthController@handleProviderCallback']);
+Route::get('callback', [ 'as' => 'callback', 'uses' => 'AuthController@handleProviderCallback']);
  
 
   

@@ -18,4 +18,6 @@ class Client extends Model
         'user_id',
         'name',    
     ];
+
+
 }

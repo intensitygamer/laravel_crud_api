@@ -4,17 +4,17 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>Edit Product</h2>
+                <h2>Update Client</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('projects.index') }}" title="Go back"> <i class="fas fa-backward "></i> </a>
+                <a class="btn btn-primary" href="{{ route('clients') }}" title="Go back">Back</i> </a>
             </div>
         </div>
     </div>
 
     @if ($errors->any())
         <div class="alert alert-danger">
-            <strong>Whoops!</strong> There were some problems with your input.<br><br>
+            <strong> There were some problems with your input. </strong> <br><br>
             <ul>
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
@@ -22,41 +22,92 @@
             </ul>
         </div>
     @endif
+    <form action="{{ route('save_client') }}" method="POST">
 
-    <form action="{{ route('projects.update', $project->id) }}" method="POST">
         @csrf
-        @method('PUT')
 
-        <div class="row">
+        <div class="row" style="margin-left:20px; margin-right:20px;">
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>Name:</strong>
-                    <input type="text" name="name" value="{{ $project->name }}" class="form-control" placeholder="Name">
+                    <strong>First Name:</strong>
+                    <input type="text" name="first_name" class="form-control" placeholder="First Name" value >
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>Introduction:</strong>
-                    <textarea class="form-control" style="height:50px" name="introduction"
-                        placeholder="Introduction">{{ $project->introduction }}</textarea>
+                    <strong>Last Name:</strong>
+                    <input type="text" name="last_name" class="form-control" placeholder="Last Name">
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>Location:</strong>
-                    <input type="text" name="location" class="form-control" placeholder="{{ $project->location }}"
-                        value="{{ $project->location }}">
+                    <strong>Email:</strong>
+                    <input type="text" name="email" class="form-control" placeholder="Email">
                 </div>
             </div>
+
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>Cost:</strong>
-                    <input type="number" name="cost" class="form-control" placeholder="{{ $project->cost }}"
-                        value="{{ $project->location }}">
+                    <strong>Password:</strong>
+                    <input type="password" name="password" class="form-control" placeholder="Password">
                 </div>
             </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Address:</strong>
+                    <input type="text" name="address" class="form-control" placeholder="Address">
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Street:</strong>
+                    <input type="text" name="street" class="form-control" placeholder="Street">
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>House No:</strong>
+                    <input type="text" name="house_no" class="form-control" placeholder="House No">
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>City:</strong>
+                    <input type="text" name="city" class="form-control" placeholder="City">
+                </div>
+            </div>
+
+
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Territory:</strong>
+                    <input type="text" name="territory" class="form-control" placeholder="Territory">
+                </div>
+            </div>
+
+ 
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Postal Code:</strong>
+                    <input type="text" name="postal_code" class="form-control" placeholder="Postal Code">
+                </div>
+            </div>
+
+ 
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Country:</strong>
+                    <input type="text" name="country" class="form-control" placeholder="Country">
+                </div>
+            </div>
+
+
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">Save</button>
             </div>
         </div>
 

@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Client / Staffs Login') }}</div>
+                <div class="card-header">{{ __('Admin Login') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
@@ -57,19 +57,19 @@
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Login') }}
                                 </button>
-
+<!-- 
                                 <a href="{{ url('redirect') }}">
                                     <img src="https://developers.google.com/identity/images/btn_google_signin_dark_normal_web.png" style="margin-left: 3em;">
-                                </a>
+                                </a> -->
 
                                 @if (Route::has('password.request'))
-                                    <a class="btn btn-info" href="{{ route('password.request') }}">
+                                    <a class="btn btn-link" href="{{ route('password.request') }}">
                                         {{ __('Forgot Your Password?') }}
                                     </a>
                                 @endif
                             </div>
                             
-                             
+                              
                         </div>
 
 

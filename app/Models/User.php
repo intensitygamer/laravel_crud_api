@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
+use App\Models\UserDetails;
+use Illuminate\Database\Eloquent\Model;
 
 class User extends Authenticatable
 {
@@ -43,4 +45,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function user_details(){
+
+            return $this->hasOne(UserDetails::class, 'user_id');
+            //return $this->belongsTo(UserDetails::class, 'user_id');
+
+    }
+
 }

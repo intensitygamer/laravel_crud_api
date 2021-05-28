@@ -87,16 +87,28 @@ class AuthController extends Controller
         } else {
 
             // create a new user
+            
+            //print_r($user);
+
             $newUser                  = new User;
-            $newUser->name            = $user->name;
+            $newUser->first_name      = $user->user['given_name'];
+            $newUser->last_name       = $user->user['family_name'];
             $newUser->email           = $user->email;
             $newUser->google_id       = $user->id;
-            $newUser->avatar          = $user->avatar;
-            $newUser->avatar_original = $user->avatar_original;
+            $newUser->user_type_id    = 3;
+
+            $newUser->avatar_url      = $user->avatar;
+            //$newUser->avatar_original = $user->avatar_original;
+
             $newUser->save();
+         
             auth()->login($newUser, true);
+            
+            return redirect()->to('/login');
+
         }
-        return redirect()->to('/home');
+        
+        return redirect()->to('/login');
 
     }
 

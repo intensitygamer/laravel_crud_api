@@ -20,8 +20,10 @@ class ClientController extends BaseController
      */
     public function index()
     {   
-        //
-       // return view('clients.create');
+        $clients = User::get();       
+ 
+        return view('clients.index')->with('clients', $clients);
+
     }
 
     
@@ -113,7 +115,50 @@ class ClientController extends BaseController
      */
     public function update(Request $request, Client $client)
     {
-        //
+        //        
+        
+        $request->validate([
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'email' => 'required|unique:users',
+            'password' => 'required'
+        ]);
+       
+        $input          = $request->all();
+        
+        //$user_details   = new UserDetails();
+        $user           = new User();
+  
+        if($validator->fails()){
+
+            return view('clients.create')->with('errors', $validator->errors() );
+
+        }
+
+        $user_inputs['email']          = $input["email"];
+        $user_inputs['password']       = Hash::make($input['password']);
+        $user_inputs['first_name']     = $input['first_name'];
+        $user_inputs['last_name']      = $input['last_name'];
+        $user_inputs['user_type_id']   = 2;
+
+        User::where('id', $user->id)->update($user_inputs);
+ 
+        $user_details['user_id']        = $user_result->id ;
+        $user_details['address']        = $input['address']  ;
+        $user_details['street']         = $input['street']  ;
+        $user_details['house_no']       = $input['house_no'] ;
+        $user_details['city']           = $input['city'] ;
+        $user_details['territory']      = $input['territory'] ;
+        $user_details['postal_code']    = $input['postal_code'] ;
+        $user_details['country']        = $input['country'] ;
+ 
+        UserDetails::create($user_details);
+
+        $client->update($request->all());
+    
+        return redirect()->route('clients')
+                        ->with('success','Clients updated successfully');
+
     }
 
     /**
@@ -125,5 +170,10 @@ class ClientController extends BaseController
     public function destroy(Client $client)
     {
         //
+        $client->delete();
+    
+        return redirect()->route('clients')
+                        ->with('success','Clients deleted successfully');
+
     }
 }
