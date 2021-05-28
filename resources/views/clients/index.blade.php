@@ -35,11 +35,13 @@
                 <td>{{ isset( $client->user_details->address ) ? $client->user_details->address : '' }}</td>
                 <td>{{ $client->email }}</td>
                 <td>{{ date_format($client->created_at, 'jS M Y') }}</td>
-                <td>
-                        <form>
-                        <a href= "" class = 'btn btn-success'>  Update</a>
-                        <a href= "" class = 'btn btn-info'>     View </a>
-                        <a href= "" class = 'btn btn-danger'>   Delete </a>
+                <td> 
+                        <form action="{{ route('posts.destroy',$value->id) }}" method="POST">   
+                            <a class="btn btn-info" href="{{ route('clients', $value->id) }}">Show</a>    
+                            <a class="btn btn-primary"  href="{{ route('clients.edit',$value->id) }}">Edit</a>   
+                            @csrf
+                            @method('DELETE')      
+                            <button type="submit" class="btn btn-danger">Delete</button>
                         </form>
 
                  </td>

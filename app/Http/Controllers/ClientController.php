@@ -104,6 +104,10 @@ class ClientController extends BaseController
     public function show(Client $client)
     {
         //
+        
+        return view('clients.show', compact('client'));
+
+
     }
 
     /**

@@ -48,6 +48,7 @@ Route::middleware('check.is.admin')->group(function(){
     Route::get('update_client', [ 'as' => 'update_client', 'uses' => 'ClientController@update_client_form']);
     Route::post('update_client', [ 'as' => 'update_client', 'uses' => 'ClientController@update']);
     Route::get('clients', [ 'as' => 'clients', 'uses' => 'ClientController@index']);
+    Route::get('clients_show', [ 'as' => 'clients.show', 'uses' => 'ClientController@show']);
     Route::post('delete_client', [ 'as' => 'delete_client', 'uses' => 'ClientController@destroy']);
 
     /* Staffs */
