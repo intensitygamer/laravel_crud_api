@@ -17,7 +17,7 @@ class CreateUserDetailsTable extends Migration
             $table->id();
             $table->foreignID('user_id');
             $table->string('address');
-            $table->string('streeet');
+            $table->string('street');
             $table->string('house_no');
             $table->string('city');
             $table->string('territory');

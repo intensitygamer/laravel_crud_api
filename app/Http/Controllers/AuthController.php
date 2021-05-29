@@ -9,25 +9,61 @@ use Illuminate\Support\Facades\Hash;
 use Auth;
 use Laravel\Socialite\Facades\Socialite;
 
+use Validator;
 
 class AuthController extends Controller
 {
     //
 
     public function login(Request $request){
+        
+        $input          = $request->all();
+
+        
+        // $credentials['email']     = $request->email;
+        // $credentials['password']  = Hash::make(123,     
+        //                         'rounds' => 12    );
+
+        // $credentials = [
+        //     'email' => $input['email'],
+        //     'password' => $input['password'],
+        // ];
+
+
+        // $credentials = $request->validate([
+        //     'email' => ['required', 'email'],
+        //     'password' => ['required'],
+        // ]);
+
+        // if(Hash::check($credentials['password'], '$2y$10$ZdvwLv09hWLEZnDtcMzR8.tG/RRJ6EMwBkKGNDP2x8jwVKDfVwgPS')){
+        //     echo 'true';
+        // }
+
+        // $login = Auth::login($credentials);
  
-        $loginData = $request->validate([
-            'email' => 'email|required',
-            'password' => 'required'
-        ]);
+        // echo Auth::id();
 
-        if (!auth()->attempt($loginData)) {
-            return response(['message' => 'This User does not exist, check your details'], 400);
-        }
+        // if(Auth::attempt($credentials)) {
 
+        // if($validator->fails()){
+            
+        //     $messages = $validator->messages();
+            
+        //     echo $messages;
+
+        //     return $this->sendError('Validation Error.', $validator->errors());       
+
+        // }        
+ 
+        // if (!auth()->attempt($credentials)) {
+        //     return response(['message' => 'This User does not exist, check your details'], 400);
+        // }
+ 
         //$accessToken = auth()->user()->createToken('authToken')->accessToken;
 
        // return response(['user' => auth()->user(), 'access_token' => $accessToken]);
+
+       return redirect()->to('clients');
 
     }
     

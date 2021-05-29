@@ -39,14 +39,14 @@ Route::get('/login', function () {
 
 Route::post('login', [ 'as' => 'login', 'uses' => 'AuthController@login']);
 
-Route::middleware('check.is.admin')->group(function(){
+//Route::middleware('is.admin')->group(function(){
 
     /* Client */
 
     Route::get('create_client', [ 'as' => 'create_client', 'uses' => 'ClientController@create_client']);
     Route::post('save_client', [ 'as' => 'save_client', 'uses' => 'ClientController@store']);
-    Route::get('update_client', [ 'as' => 'update_client', 'uses' => 'ClientController@update_client_form']);
-    Route::post('update_client', [ 'as' => 'update_client', 'uses' => 'ClientController@update']);
+    Route::get('client/{id}', [ 'as' => 'edit.client', 'uses' => 'ClientController@edit']);
+    Route::post('update/{id}', [ 'as' => 'update.client', 'uses' => 'ClientController@update']);
     Route::get('clients', [ 'as' => 'clients', 'uses' => 'ClientController@index']);
     Route::get('clients_show', [ 'as' => 'clients.show', 'uses' => 'ClientController@show']);
     Route::post('delete_client', [ 'as' => 'delete_client', 'uses' => 'ClientController@destroy']);
@@ -70,7 +70,7 @@ Route::middleware('check.is.admin')->group(function(){
 
 
     
-});
+//});
 
 /* Admin Login */
 

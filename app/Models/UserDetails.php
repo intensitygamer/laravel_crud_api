@@ -18,7 +18,7 @@ class UserDetails extends Model
     protected $fillable = [
         'user_id',
         'address',
-        'streeet',
+        'street',
         'house_no',
         'city',
         'territory',

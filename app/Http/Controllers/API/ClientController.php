@@ -35,8 +35,7 @@ class ClientController extends Controller
             return $this->sendError('User not found.');
         }
 
-
-        return response(['users' => $users], 201);
+         return response(['users' => $users], 201);
 
     }
 
@@ -71,18 +70,17 @@ class ClientController extends Controller
         }
    
         $user_result           = User::create($user);
-        
-        print_r($user_result);
+         
 
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Admin  $admin
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(Admin $admin)
+    public function show(User $user)
     {
         //
         $user = User::find($id);

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Client;
 use App\Models\User;
 use App\Models\UserDetails;
 use Illuminate\Http\Request;
@@ -12,7 +11,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\API\BaseController as BaseController;
 
 class ClientController extends BaseController
-{
+{   
     /**
      * Display a listing of the resource.
      *
@@ -46,7 +45,7 @@ class ClientController extends BaseController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\User $user
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -98,10 +97,10 @@ class ClientController extends BaseController
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Client  $client
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(Client $client)
+    public function show(User $user)
     {
         //
         
@@ -114,21 +113,21 @@ class ClientController extends BaseController
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Client  $client
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Client $client)
+    public function update(Request $request, User $user)
     {
         //        
         
-        $request->validate([
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'email' => 'required|unique:users',
-            'password' => 'required'
-        ]);
-       
         $input          = $request->all();
+
+        $validator      = Validator::make($input, [
+                            'first_name' => 'required',
+                            'last_name' => 'required',
+                            'email' => 'required',
+                        ]);
+       
         
         //$user_details   = new UserDetails();
         $user           = new User();
@@ -140,14 +139,13 @@ class ClientController extends BaseController
         }
 
         $user_inputs['email']          = $input["email"];
-        $user_inputs['password']       = Hash::make($input['password']);
         $user_inputs['first_name']     = $input['first_name'];
         $user_inputs['last_name']      = $input['last_name'];
-        $user_inputs['user_type_id']   = 2;
+        //$user_inputs['user_type_id']   = 2;
 
-        User::where('id', $user->id)->update($user_inputs);
+        User::where('id', $request->id)->update($user_inputs);
  
-        $user_details['user_id']        = $user_result->id ;
+       //$user_details['user_id']        = $user_result->id ;
         $user_details['address']        = $input['address']  ;
         $user_details['street']         = $input['street']  ;
         $user_details['house_no']       = $input['house_no'] ;
@@ -155,10 +153,12 @@ class ClientController extends BaseController
         $user_details['territory']      = $input['territory'] ;
         $user_details['postal_code']    = $input['postal_code'] ;
         $user_details['country']        = $input['country'] ;
+        
+        echo $request->id;
  
-        UserDetails::create($user_details);
+        UserDetails::where('user_id', $request->id)->update($user_details);
 
-        $client->update($request->all());
+        //$client->update($request->all());
     
         return redirect()->route('clients')
                         ->with('success','Clients updated successfully');
@@ -166,12 +166,30 @@ class ClientController extends BaseController
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Update the specified resource in storage.
      *
-     * @param  \App\Models\Client  $client
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\User $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Client $client)
+    public function edit(Request $request, User $user)
+    {
+
+        //
+
+        $client = User::find( $request->id ); 
+  
+        return view('clients.edit', compact('client'));
+
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(User $user)
     {
         //
         $client->delete();

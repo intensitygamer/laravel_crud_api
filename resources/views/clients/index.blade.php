@@ -36,9 +36,9 @@
                 <td>{{ $client->email }}</td>
                 <td>{{ date_format($client->created_at, 'jS M Y') }}</td>
                 <td> 
-                        <form action="{{ route('posts.destroy',$value->id) }}" method="POST">   
-                            <a class="btn btn-info" href="{{ route('clients', $value->id) }}">Show</a>    
-                            <a class="btn btn-primary"  href="{{ route('clients.edit',$value->id) }}">Edit</a>   
+                        <form action="{{ route('delete_client',$client->id) }}" method="POST">   
+                            <a class="btn btn-info" href="{{ route('clients.show', $client->id) }}">Show</a>    
+                            <a class="btn btn-primary"  href="{{ route('edit.client', $client->id) }}">Edit</a>   
                             @csrf
                             @method('DELETE')      
                             <button type="submit" class="btn btn-danger">Delete</button>
