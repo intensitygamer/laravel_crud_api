@@ -8,10 +8,10 @@ use App\Models\UserDetails;
 use Illuminate\Http\Request;
 use Validator;
 use Illuminate\Support\Facades\Hash;
+//use Illuminate\Foundation\Auth\User as Authenticatable;
 
-use App\Http\Controllers\API\BaseController as BaseController;
-
-class ClientController extends BaseController
+    
+class ClientController extends Controller
 {   
     /**
      * Display a listing of the resource.
@@ -21,7 +21,9 @@ class ClientController extends BaseController
     public function index()
     {   
         $clients = Client::get();       
- 
+        
+        // echo Auth::id();
+        // exit;
         return view('clients.index')->with('clients', $clients);
 
     }
@@ -178,7 +180,7 @@ class ClientController extends BaseController
 
         //
 
-        $client = User::find( $request->id ); 
+        $client = Client::find( $request->id ); 
   
         return view('clients.edit', compact('client'));
 

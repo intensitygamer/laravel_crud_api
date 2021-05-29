@@ -35,7 +35,7 @@
                 <td>{{ $client->user_info->first_name }} {{ $client->last_name }} </td>
                 <td>{{ isset( $client->user_details->address ) ? $client->user_details->address : '' }}</td>
                 <td>{{ $client->user_info->email }}</td>
-                <td>{{ $client->user_info->crm_url }}</td>
+                <td>{{ $client->crm_url }}</td>
                 <td>{{ date_format($client->created_at, 'jS M Y') }}</td>
                 <td> 
                         <form action="{{ route('delete_client',$client->id) }}" method="POST">   

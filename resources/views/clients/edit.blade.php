@@ -30,19 +30,19 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>First Name:</strong>
-                    <input type="text" name="first_name" class="form-control" placeholder="First Name" value = {{ $client->first_name }} >
+                    <input type="text" name="first_name" class="form-control" placeholder="First Name" value = {{ $client->user_info->first_name }} >
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Last Name:</strong>
-                    <input type="text" name="last_name" class="form-control" placeholder="Last Name" value = {{ $client->last_name }}>
+                    <input type="text" name="last_name" class="form-control" placeholder="Last Name" value = {{ $client->user_info->last_name }}>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Email:</strong>
-                    <input type="text" name="email" class="form-control" placeholder="Email" value = {{ $client->email }}>
+                    <input type="text" name="email" class="form-control" placeholder="Email" value = {{ $client->user_info->email }}>
                 </div>
             </div>
 <!-- 
@@ -56,28 +56,28 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Address:</strong>
-                    <input type="text" name="address" class="form-control" placeholder="Address" value = {{ $client->user_details->address }} >
+                    <input type="text" name="address" class="form-control" placeholder="Address" value = {{ isset( $client->user_details->address ) ? $client->user_details->address : '' }} >
                 </div>
             </div>
 
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Street:</strong>
-                    <input type="text" name="street" class="form-control" placeholder="Street" value = {{ $client->user_details->street }}  >
+                    <input type="text" name="street" class="form-control" placeholder="Street" value = {{ isset( $client->user_details->street ) ? $client->user_details->street : '' }}}  >
                 </div>
             </div>
 
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>House No:</strong>
-                    <input type="text" name="house_no" class="form-control" placeholder="House No" value = {{ $client->user_details->house_no }} >
+                    <input type="text" name="house_no" class="form-control" placeholder="House No" value = {{ isset( $client->user_details->house_no ) ? $client->user_details->house_no : '' }} >
                 </div>
             </div>
 
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>City:</strong>
-                    <input type="text" name="city" class="form-control" placeholder="City" value = {{ $client->user_details->city }}>
+                    <input type="text" name="city" class="form-control" placeholder="City" value = {{ isset( $client->user_details->city ) ? $client->user_details->city : '' }}>
                 </div>
             </div>
 
@@ -85,7 +85,7 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Territory:</strong>
-                    <input type="text" name="territory" class="form-control" placeholder="Territory" value = {{ $client->user_details->territory }}>
+                    <input type="text" name="territory" class="form-control" placeholder="Territory" value =  {{ isset( $client->user_details->territory ) ? $client->user_details->territory : '' }}>
                 </div>
             </div>
 
@@ -93,7 +93,7 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Postal Code:</strong>
-                    <input type="text" name="postal_code" class="form-control" placeholder="Postal Code" value = {{ $client->user_details->postal_code }}>
+                    <input type="text" name="postal_code" class="form-control" placeholder="Postal Code" value =  {{ isset( $client->user_details->postal_code ) ? $client->user_details->postal_code : '' }}>
                 </div>
             </div>
 
@@ -101,7 +101,7 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Country:</strong>
-                    <input type="text" name="country" class="form-control" placeholder="Country" value = {{ $client->user_details->country }}>
+                    <input type="text" name="country" class="form-control" placeholder="Country" {{ isset( $client->user_details->country ) ? $client->user_details->country : '' }} >
                 </div>
             </div>
 

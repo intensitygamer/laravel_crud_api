@@ -8,7 +8,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Auth;
 use Laravel\Socialite\Facades\Socialite;
-
+ 
 use Validator;
 
 class AuthController extends Controller
@@ -17,8 +17,8 @@ class AuthController extends Controller
 
     public function login(Request $request){
         
-        $input          = $request->all();
-
+        $input   = $request->all();
+        $user    = new User;
         
         // $credentials['email']     = $request->email;
         // $credentials['password']  = Hash::make(123,     
@@ -39,11 +39,11 @@ class AuthController extends Controller
         //     echo 'true';
         // }
 
-        $login = Auth::login($credentials);
- 
-        echo Auth::id();
+  
 
         if(Auth::attempt($credentials)) {
+
+            $login = Auth::login($user, true);
 
         // if($validator->fails()){
             
