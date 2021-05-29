@@ -25,15 +25,17 @@
             <th>Name</th>
             <th>Address</th>
             <th>Email</th>
+            <th>CRM URL</th>
             <th>Date Created</th>
             <th width="280px">Action</th>
         </tr>
         @foreach ($clients as $client)
             <tr>
                 <td>{{ $client->id }}</td>
-                <td>{{ $client->first_name }} {{ $client->last_name }} </td>
+                <td>{{ $client->user_info->first_name }} {{ $client->last_name }} </td>
                 <td>{{ isset( $client->user_details->address ) ? $client->user_details->address : '' }}</td>
-                <td>{{ $client->email }}</td>
+                <td>{{ $client->user_info->email }}</td>
+                <td>{{ $client->user_info->crm_url }}</td>
                 <td>{{ date_format($client->created_at, 'jS M Y') }}</td>
                 <td> 
                         <form action="{{ route('delete_client',$client->id) }}" method="POST">   

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Client;
 use App\Models\UserDetails;
 use Illuminate\Http\Request;
 use Validator;
@@ -19,7 +20,7 @@ class ClientController extends BaseController
      */
     public function index()
     {   
-        $clients = User::get();       
+        $clients = Client::get();       
  
         return view('clients.index')->with('clients', $clients);
 

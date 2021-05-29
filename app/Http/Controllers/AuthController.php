@@ -30,20 +30,20 @@ class AuthController extends Controller
         // ];
 
 
-        // $credentials = $request->validate([
-        //     'email' => ['required', 'email'],
-        //     'password' => ['required'],
-        // ]);
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
 
         // if(Hash::check($credentials['password'], '$2y$10$ZdvwLv09hWLEZnDtcMzR8.tG/RRJ6EMwBkKGNDP2x8jwVKDfVwgPS')){
         //     echo 'true';
         // }
 
-        // $login = Auth::login($credentials);
+        $login = Auth::login($credentials);
  
-        // echo Auth::id();
+        echo Auth::id();
 
-        // if(Auth::attempt($credentials)) {
+        if(Auth::attempt($credentials)) {
 
         // if($validator->fails()){
             
@@ -53,7 +53,7 @@ class AuthController extends Controller
 
         //     return $this->sendError('Validation Error.', $validator->errors());       
 
-        // }        
+        }        
  
         // if (!auth()->attempt($credentials)) {
         //     return response(['message' => 'This User does not exist, check your details'], 400);
