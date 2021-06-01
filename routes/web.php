@@ -51,38 +51,42 @@ Route::middleware('auth.basic')->group(function(){
 
     /* Client */
 
-    Route::get('create_client', [ 'as' => 'create_client',  'uses' => 'ClientController@create_client']);
-    Route::post('save_client', [ 'as' => 'save_client',     'uses' => 'ClientController@store']);
-    Route::get('client/{id}', [ 'as' => 'edit.client',      'uses' => 'ClientController@edit']);
-    Route::post('update', [ 'as' => 'update.client',        'uses' => 'ClientController@update']);
-    Route::get('clients', [ 'as' => 'clients',              'uses' => 'ClientController@index']);
-    Route::get('clients_show', [ 'as' => 'clients.show',    'uses' => 'ClientController@show']);
-    Route::delete('delete_client/{id}', [ 'as' => 'delete_client', 'uses' => 'ClientController@destroy']);
+        Route::get('create_client', [ 'as' => 'create_client',  'uses' => 'ClientController@create_client']);
+        Route::post('save_client', [ 'as' => 'save_client',     'uses' => 'ClientController@store']);
+        Route::get('client/{id}', [ 'as' => 'edit.client',      'uses' => 'ClientController@edit']);
+        Route::post('update', [ 'as' => 'update.client',        'uses' => 'ClientController@update']);
+        Route::get('clients', [ 'as' => 'clients',              'uses' => 'ClientController@index']);
+        Route::get('clients_show', [ 'as' => 'clients.show',    'uses' => 'ClientController@show']);
+        Route::delete('delete_client/{id}', [ 'as' => 'delete_client', 'uses' => 'ClientController@destroy']);
 
     });
 
-    /* Staffs */
+    /* Staff */
 
     Route::middleware('is.client')->group(function(){
 
-    Route::get('create_staff',  [ 'as' => 'client',         'uses' => 'StaffController@create_client']);
-    Route::post('save_staff',   [ 'as' => 'save_staff',     'uses' => 'StaffController@store']);
-    Route::get('update_staff',  [ 'as' => 'update_staff',   'uses' => 'StaffController@update_staff']);
-    Route::post('update_staff', [ 'as' => 'update_staff',   'uses' => 'StaffController@update']);
-    Route::get('staffs',        [ 'as' => 'staffs',         'uses' => 'StaffController@index']);
+        Route::get('create_staff',  [ 'as' => 'client',         'uses' => 'StaffController@create_client']);
+        Route::post('save_staff',   [ 'as' => 'save_staff',     'uses' => 'StaffController@store']);
+        Route::get('update_staff',  [ 'as' => 'update_staff',   'uses' => 'StaffController@update_staff']);
+        Route::post('update_staff', [ 'as' => 'update_staff',   'uses' => 'StaffController@update']);
+        Route::get('staffs',        [ 'as' => 'staffs',         'uses' => 'StaffController@index']);
 
 
     });
 
-    /* Admin */
+    /* Master Admin */
 
-    Route::get('create_admin', [ 'as' => 'create_admin',  'uses' => 'AdminController@create_client']);
-    Route::post('save_admin', [ 'as' => 'save_admin',     'uses' => 'AdminController@store']);
-    Route::get('admin/{id}', [ 'as' => 'edit.admin',      'uses' => 'AdminController@edit']);
-    Route::post('update', [ 'as' => 'update.admin',        'uses' => 'AdminController@update']);
-    Route::get('admins', [ 'as' => 'admins',              'uses' => 'AdminController@index']);
-    Route::get('admin_show', [ 'as' => 'admin.show',    'uses' => 'AdminController@show']);
-    Route::delete('delete_admin/{id}', [ 'as' => 'delete_client', 'uses' => 'AdminController@destroy']);
+    Route::middleware('is.master_admin')->group(function(){
+
+        Route::get('create_admin', [ 'as' => 'create_admin',  'uses' => 'AdminController@create_client']);
+        Route::post('save_admin', [ 'as' => 'save_admin',     'uses' => 'AdminController@store']);
+        Route::get('admin/{id}', [ 'as' => 'edit.admin',      'uses' => 'AdminController@edit']);
+        Route::post('update', [ 'as' => 'update.admin',        'uses' => 'AdminController@update']);
+        Route::get('admins', [ 'as' => 'admins',              'uses' => 'AdminController@index']);
+        Route::get('admin_show', [ 'as' => 'admin.show',    'uses' => 'AdminController@show']);
+        Route::delete('delete_admin/{id}', [ 'as' => 'delete_client', 'uses' => 'AdminController@destroy']);
+
+    });
 
 });
 

@@ -58,8 +58,6 @@ Route::group(
        
         Route::post('client', 'ClientController@store');
         
-        //Route::post('client', 'ClientController@store');
-
         Route::get('admin', 'UserController@show_admins');
 
         Route::get('logout', 'AuthController@logout');

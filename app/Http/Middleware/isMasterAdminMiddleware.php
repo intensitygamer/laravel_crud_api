@@ -16,6 +16,12 @@ class isMasterAdminMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
+        $user = Auth::user();
+        
+        if (!Auth::check() || $user['user_type_id'] != 1 ) {
+            return redirect('login');
+        }
+
         return $next($request);
     }
 }
