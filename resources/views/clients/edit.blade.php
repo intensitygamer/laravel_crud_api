@@ -30,19 +30,19 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>First Name:</strong>
-                    <input type="text" name="first_name" class="form-control" placeholder="First Name" value = {{ $client->user_info->first_name }} >
+                    <input type="text" name="first_name" class="form-control" placeholder="First Name" value = {{ isset( $client->user_info->first_name ) ?  $client->user_info->first_name : ''}} >
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Last Name:</strong>
-                    <input type="text" name="last_name" class="form-control" placeholder="Last Name" value = {{ $client->user_info->last_name }}>
+                    <input type="text" name="last_name" class="form-control" placeholder="Last Name" value = {{ isset( $client->user_info->last_name ) ?    $client->user_info->last_name : ''}} >
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Email:</strong>
-                    <input type="text" name="email" class="form-control" placeholder="Email" value = {{ $client->user_info->email }}>
+                    <input type="text" name="email" class="form-control" placeholder="Email" value =  {{ isset( $client->user_info->email ) ? $client->user_info->email : '' }}>
                 </div>
             </div>
 <!-- 

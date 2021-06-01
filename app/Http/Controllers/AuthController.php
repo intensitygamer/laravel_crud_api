@@ -19,31 +19,16 @@ class AuthController extends Controller
         
         $input   = $request->all();
         $user    = new User;
-        
-        // $credentials['email']     = $request->email;
-        // $credentials['password']  = Hash::make(123,     
-        //                         'rounds' => 12    );
-
-        // $credentials = [
-        //     'email' => $input['email'],
-        //     'password' => $input['password'],
-        // ];
-
-
+ 
         $credentials = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],
         ]);
-
-        // if(Hash::check($credentials['password'], '$2y$10$ZdvwLv09hWLEZnDtcMzR8.tG/RRJ6EMwBkKGNDP2x8jwVKDfVwgPS')){
-        //     echo 'true';
-        // }
-
   
 
         if(Auth::attempt($credentials)) {
 
-            $login = Auth::login($user, true);
+            //$login = Auth::login($user, true);
 
         // if($validator->fails()){
             
@@ -55,9 +40,9 @@ class AuthController extends Controller
 
         }        
  
-        // if (!auth()->attempt($credentials)) {
-        //     return response(['message' => 'This User does not exist, check your details'], 400);
-        // }
+        if (!auth()->attempt($credentials)) {
+            return response(['message' => 'This User does not exist, check your details'], 400);
+        }
  
         //$accessToken = auth()->user()->createToken('authToken')->accessToken;
 
@@ -91,9 +76,16 @@ class AuthController extends Controller
     }
 
     public function logout (Request $request) {
-        $token = $request->user()->token();
-        $token->revoke();
+
+        // $token = $request->user()->token();
+        // $token->revoke();
+        //
+        //
+
+        Auth::logout();
+
         $response = ['message' => 'You have been successfully logged out!'];
+
         return response($response, 200);
     }
     
@@ -105,6 +97,7 @@ class AuthController extends Controller
         } catch (\Exception $e) {
             return redirect('/login');
         }
+
         // only allow people with @company.com to login
         // if(explode("@", $user->email)[1] !== 'company.com'){
         //     return redirect()->to('/');
@@ -140,7 +133,7 @@ class AuthController extends Controller
          
             auth()->login($newUser, true);
             
-            return redirect()->to('/login');
+            return redirect()->to('/clients');
 
         }
         

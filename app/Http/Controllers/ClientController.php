@@ -100,12 +100,14 @@ class ClientController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\Client $client
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(Request $request, Client $client)
     {
         //
+        
+        $clients = Client::find($request->id);       
         
         return view('clients.show', compact('client'));
 
@@ -189,14 +191,19 @@ class ClientController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\Client  $client
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
-    {
+    public function destroy(Request $request, Client $client)
+    { 
         //
+
+        $id = $request->id;
+
+        $client = Client::find( $id );
+
         $client->delete();
-    
+ 
         return redirect()->route('clients')
                         ->with('success','Clients deleted successfully');
 

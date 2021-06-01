@@ -6,11 +6,16 @@
             <div class="pull-left">
                 <h2> Clients </h2>
             </div>
-            <div class="pull-right">
+            <div class="pull-left">
                 <a class="btn btn-info" href="{{ route('create_client') }}" title="Create a client"> Create a client <i class="fas fa-plus-circle"></i>
                     </a>
             </div>
-        </div>
+
+            <div class="pull-right">
+                    <a class="btn btn-info" href="{{ route('logout') }}" title="Logout"> Logout <i class="fas fa-plus-circle"></i> </a>
+            </div>
+
+         </div>
     </div>
 
     @if ($message = Session::get('success'))
@@ -32,9 +37,9 @@
         @foreach ($clients as $client)
             <tr>
                 <td>{{ $client->id }}</td>
-                <td>{{ $client->user_info->first_name }} {{ $client->last_name }} </td>
+                <td>{{ isset( $client->user_info->first_name ) ?  $client->user_info->first_name  : ''}} {{ isset( $client->user_info->last_name ) ?  $client->user_info->last_name  : ''}} </td>
                 <td>{{ isset( $client->user_details->address ) ? $client->user_details->address : '' }}</td>
-                <td>{{ $client->user_info->email }}</td>
+                <td> {{ isset( $client->user_info->email ) ?  $client->user_info->email  : ''}}  </td>
                 <td>{{ $client->crm_url }}</td>
                 <td>{{ date_format($client->created_at, 'jS M Y') }}</td>
                 <td> 
