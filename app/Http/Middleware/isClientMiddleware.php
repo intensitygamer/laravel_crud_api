@@ -5,9 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-use Illuminate\Support\Facades\Auth;
-
-class IsAdminMiddleware
+class isClientMiddleware
 {
     /**
      * Handle an incoming request.
@@ -20,10 +18,10 @@ class IsAdminMiddleware
     {
         $user = Auth::user();
         
-        if (!Auth::check() || $user['user_type_id'] != 2 ) {
+        if (!Auth::check() || $user['user_type_id'] != 3 ) {
             return redirect('login');
         }
-
+        
         return $next($request);
     }
 }

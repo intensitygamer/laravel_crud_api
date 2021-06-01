@@ -30,15 +30,15 @@ class AuthController extends Controller
 
             //$login = Auth::login($user, true);
 
-        // if($validator->fails()){
-            
-        //     $messages = $validator->messages();
-            
-        //     echo $messages;
+            // if($validator->fails()){
+                
+            //     $messages = $validator->messages();
+                
+            //     echo $messages;
 
-        //     return $this->sendError('Validation Error.', $validator->errors());       
+            //     return $this->sendError('Validation Error.', $validator->errors());       
 
-        }
+            }
  
         if (!auth()->attempt($credentials)) {
 
@@ -49,10 +49,6 @@ class AuthController extends Controller
             //->to('login')
         
         }
- 
-        //$accessToken = auth()->user()->createToken('authToken')->accessToken;
-
-       // return response(['user' => auth()->user(), 'access_token' => $accessToken]);
 
        return redirect()->to('clients');
 

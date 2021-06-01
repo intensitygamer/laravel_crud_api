@@ -39,7 +39,15 @@ Route::get('logout', [ 'as' => 'logout', 'uses' => 'AuthController@logout']);
 
 Route::post('login', [ 'as' => 'login', 'uses' => 'AuthController@login']);
 
-//Route::middleware('is.admin')->group(function(){
+
+//* Admin & Client Access 
+
+Route::middleware('auth.basic')->group(function(){
+
+
+    //* Admin Access Only 
+
+    Route::middleware('is.admin')->group(function(){
 
     /* Client */
 
@@ -51,7 +59,11 @@ Route::post('login', [ 'as' => 'login', 'uses' => 'AuthController@login']);
     Route::get('clients_show', [ 'as' => 'clients.show',    'uses' => 'ClientController@show']);
     Route::delete('delete_client/{id}', [ 'as' => 'delete_client', 'uses' => 'ClientController@destroy']);
 
+    });
+
     /* Staffs */
+
+    Route::middleware('is.client')->group(function(){
 
     Route::get('create_staff',  [ 'as' => 'client',         'uses' => 'StaffController@create_client']);
     Route::post('save_staff',   [ 'as' => 'save_staff',     'uses' => 'StaffController@store']);
@@ -60,17 +72,19 @@ Route::post('login', [ 'as' => 'login', 'uses' => 'AuthController@login']);
     Route::get('staffs',        [ 'as' => 'staffs',         'uses' => 'StaffController@index']);
 
 
+    });
+
     /* Admin */
 
-    Route::get('create_staff',  [ 'as' => 'client',         'uses' => 'Admin@create_client']);
-    Route::post('save_staff',   [ 'as' => 'save_staff',     'uses' => 'AdminController@store']);
-    Route::get('update_staff',  [ 'as' => 'update_staff',   'uses' => 'AdminController@update_staff']);
-    Route::post('update_staff', [ 'as' => 'update_staff',   'uses' => 'AdminController@update']);
-    Route::get('staffs',        [ 'as' => 'staffs',         'uses' => 'AdminController@index']);
+    Route::get('create_admin', [ 'as' => 'create_admin',  'uses' => 'AdminController@create_client']);
+    Route::post('save_admin', [ 'as' => 'save_admin',     'uses' => 'AdminController@store']);
+    Route::get('admin/{id}', [ 'as' => 'edit.admin',      'uses' => 'AdminController@edit']);
+    Route::post('update', [ 'as' => 'update.admin',        'uses' => 'AdminController@update']);
+    Route::get('admins', [ 'as' => 'admins',              'uses' => 'AdminController@index']);
+    Route::get('admin_show', [ 'as' => 'admin.show',    'uses' => 'AdminController@show']);
+    Route::delete('delete_admin/{id}', [ 'as' => 'delete_client', 'uses' => 'AdminController@destroy']);
 
-
-    
-//});
+});
 
 /* Admin Login */
 

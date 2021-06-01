@@ -11,9 +11,6 @@
                     </a>
             </div>
 
-            <div class="pull-right">
-                    <a class="btn btn-info" href="{{ route('logout') }}" title="Logout"> Logout <i class="fas fa-plus-circle"></i> </a>
-            </div>
 
          </div>
     </div>
@@ -56,5 +53,10 @@
             </tr>
         @endforeach
     </table>
+
+    
+    <div class="pull-center">
+        <a class="btn btn-danger" href="{{ route('logout') }}" title="Logout"> Logout <i class="fas fa-plus-circle"></i> </a>
+    </div>
 
 @endsection

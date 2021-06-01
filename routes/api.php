@@ -50,7 +50,6 @@ Route::group(
         Route::post('user', 'UserController@store');
 
 
-
         Route::get('staffs', 'StaffController@index');
         Route::post('staff', 'StaffController@store');
         Route::get('staff/{id}', 'StaffController@show');
