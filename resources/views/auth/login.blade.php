@@ -11,6 +11,16 @@
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
+                        @if(isset($message)) 
+                                <div id="error" class="alert alert-danger alert-dismissable">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                    <h4><i class="icon fa fa-ban"></i> Error!</h4>
+                                        <div class="msg">{{$message}}</div>
+                                </div>
+                                
+                            @endif
+
+
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
@@ -23,6 +33,7 @@
                                     </span>
                                 @enderror
                             </div>
+                            
                         </div>
 
                         <div class="form-group row">
@@ -38,7 +49,7 @@
                                 @enderror
                             </div>
                         </div>
-
+ 
                         <div class="form-group row">
                             <div class="col-md-6 offset-md-4">
                                 <div class="form-check">
@@ -57,10 +68,19 @@
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Login') }}
                                 </button>
+                            </div>
+                            
+                            <br><br><br>
+
+                            <div class="col-md-8 offset-md-4">
+
+                                <button type="submit" class="btn btn-primary">
 
                                 <a href="{{ url('redirect') }}">
-                                    <img src="https://developers.google.com/identity/images/btn_google_signin_dark_normal_web.png" style="margin-left: 3em;">
+                                   Sign with Google
                                 </a>
+
+                                </button>
 
                                 @if (Route::has('password.request'))
                                     <a class="btn btn-info" href="{{ route('password.request') }}">

@@ -38,10 +38,16 @@ class AuthController extends Controller
 
         //     return $this->sendError('Validation Error.', $validator->errors());       
 
-        }        
+        }
  
         if (!auth()->attempt($credentials)) {
-            return response(['message' => 'This User does not exist, check your details'], 400);
+
+            return redirect('/login')->with('message', 'This User does not exist, check your details');
+
+            //return response(['message' => 'This User does not exist, check your details'], 400);
+
+            //->to('login')
+        
         }
  
         //$accessToken = auth()->user()->createToken('authToken')->accessToken;
@@ -84,9 +90,12 @@ class AuthController extends Controller
 
         Auth::logout();
 
-        $response = ['message' => 'You have been successfully logged out!'];
+        // $response = ['message' => 'You have been successfully logged out!'];
 
-        return response($response, 200);
+        // return response($response, 200);
+
+        return redirect()->to('login')->with('error', 'You have been successfully logged out!');;
+
     }
     
 
