@@ -27,30 +27,33 @@ class AuthController extends Controller
   
 
         if(Auth::attempt($credentials)) {
+            
+            $user = Auth::user();
+    
+            return redirect()->to('clients');
 
-            //$login = Auth::login($user, true);
+            //* User Type ID for Client - 3
 
-            // if($validator->fails()){
-                
-            //     $messages = $validator->messages();
-                
-            //     echo $messages;
+            // if($user->user_type_id == 3) {
 
-            //     return $this->sendError('Validation Error.', $validator->errors());       
+            //     // echo $user->user_type_id;
+            
+            //     // exit;
+    
 
-            }
+            // }
  
-        if (!auth()->attempt($credentials)) {
+        }
+
+
+       // if (!auth()->attempt($credentials)) {
 
             return redirect('/login')->with('message', 'This User does not exist, check your details');
 
             //return response(['message' => 'This User does not exist, check your details'], 400);
+              
+       // }
 
-            //->to('login')
-        
-        }
-
-       return redirect()->to('clients');
 
     }
     
