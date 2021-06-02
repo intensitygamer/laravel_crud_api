@@ -35,9 +35,27 @@ Route::get('/login', function () {
     return view('auth.login');
 }); 
 
-Route::get('logout', [ 'as' => 'logout', 'uses' => 'AuthController@logout']);
-
 Route::post('login', [ 'as' => 'login', 'uses' => 'AuthController@login']);
+
+
+/* Admin Login */
+
+Route::get('/admin_login', function () {
+    return view('auth.admin_login');
+}); 
+
+
+Route::post('admin_login', [ 'as' => 'admin_login', 'uses' => 'AuthController@admin_login']);
+
+ /* Google Login */
+
+Route::get('redirect', [ 'as' => 'redirect', 'uses' => 'AuthController@redirectToProvider']);
+Route::get('callback', [ 'as' => 'callback', 'uses' => 'AuthController@handleProviderCallback']);
+ 
+  
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('logout', [ 'as' => 'logout', 'uses' => 'AuthController@logout']);
 
 
 //* Admin & Client Access 
@@ -59,20 +77,25 @@ Route::middleware('auth.basic')->group(function(){
         Route::get('clients_show', [ 'as' => 'clients.show',    'uses' => 'ClientController@show']);
         Route::delete('delete_client/{id}', [ 'as' => 'delete_client', 'uses' => 'ClientController@destroy']);
 
+        Route::get('client_change_password/{id}', [ 'as' => 'client.change_password',      'uses' => 'ClientController@change_password']);
+
+        Route::post('client_change_password', [ 'as' => 'client.change_password',      'uses' => 'ClientController@update_password']);
+
     });
 
     /* Staff */
 
     Route::middleware('is.client')->group(function(){
 
-        Route::get('create_staff',  [ 'as' => 'client',         'uses' => 'StaffController@create_client']);
-        Route::post('save_staff',   [ 'as' => 'save_staff',     'uses' => 'StaffController@store']);
-        Route::get('update_staff',  [ 'as' => 'update_staff',   'uses' => 'StaffController@update_staff']);
-        Route::post('update_staff', [ 'as' => 'update_staff',   'uses' => 'StaffController@update']);
-        Route::get('staffs',        [ 'as' => 'staffs',         'uses' => 'StaffController@index']);
+        Route::get('create_staff',  [ 'as' => 'create_staff',        'uses' => 'StaffController@create_staff']);
+        Route::post('save_staff',   [ 'as' => 'save_staff',          'uses' => 'StaffController@store']);
+        Route::get('edit_staff',    [ 'as' => 'edit_staff',          'uses' => 'StaffController@edit_staff']);
+        Route::post('update_staff', [ 'as' => 'update_staff',        'uses' => 'StaffController@update']);
+        Route::get('staffs',        [ 'as' => 'staffs',              'uses' => 'StaffController@index']);
+        Route::get('staffs_show',        [ 'as' => 'staff.show',    'uses' => 'StaffController@show']);
+        Route::delete('delete_staff/{id}', [ 'as' => 'delete_staff', 'uses' => 'StaffController@destroy']);
 
-
-    });
+     });
 
     /* Master Admin */
 
@@ -89,17 +112,3 @@ Route::middleware('auth.basic')->group(function(){
     });
 
 });
-
-/* Admin Login */
-
-Route::get('/admin_login', function () {
-    return view('auth.admin_login');
-}); 
-
- /* Google Login */
-
-Route::get('redirect', [ 'as' => 'redirect', 'uses' => 'AuthController@redirectToProvider']);
-Route::get('callback', [ 'as' => 'callback', 'uses' => 'AuthController@handleProviderCallback']);
- 
-  
-//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

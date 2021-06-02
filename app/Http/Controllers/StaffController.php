@@ -2,15 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use App\Models\Client;
-use App\Models\UserDetails;
 use Illuminate\Http\Request;
+
+use App\Models\User;
+use App\Models\Staff;
+use App\Models\UserDetails;
 use Validator;
 use Illuminate\Support\Facades\Hash;
+
+class StaffController extends Controller
+{
+    //
+
     
-class ClientController extends Controller
-{   
     /**
      * Display a listing of the resource.
      *
@@ -18,21 +22,21 @@ class ClientController extends Controller
      */
     public function index()
     {   
-        $clients = Client::get();       
- 
-        return view('clients.index')->with('clients', $clients);
+        $staffs = Staff::get();       
+         
+        return view('staffs.index')->with('staffs', $staffs);
 
     }
 
     
-    public function create_client(Request $request)
+    public function create_staff(Request $request)
     {
         
-        return view('clients.create');
+        return view('staffs.create');
 
     }
- 
-    /**
+
+     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\User $user
@@ -175,40 +179,6 @@ class ClientController extends Controller
 
     }
 
-    
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\User $user
-     * @return \Illuminate\Http\Response
-     */
-    public function change_password(Request $request, User $user)
-    {
-
-        //
-
-        $client = Client::find( $request->id ); 
-  
-        return view('clients.change_password', compact('client'));
-
-    }
-
-    public function update_password(Request $request, User $user)
-    {
-
-        //
-
-        $client = Client::find( $request->id ); 
-  
-        User::where('id', $request->id)->update($user_inputs);
- 
-        return view('clients', compact('client'));
-
-    }
-
-
-    
     /**
      * Remove the specified resource from storage.
      *

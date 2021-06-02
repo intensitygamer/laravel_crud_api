@@ -7,7 +7,7 @@
                 <h2>Staffs </h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-success" href="{{ route('staffs.create') }}" title="Create a project"> <i class="fas fa-plus-circle"></i>
+                <a class="btn btn-success" href="{{ route('create_staff') }}" title="Staff Project"> <i class="fas fa-plus-circle"></i>Staff Create
                     </a>
             </div>
         </div>
@@ -21,36 +21,40 @@
 
     <table class="table table-bordered table-responsive-lg">
         <tr>
-            <th>No</th>
+            <th>Client ID</th>
             <th>Name</th>
-            <th>Introduction</th>
-            <th>Location</th>
-            <th>Cost</th>
+            <th>Address</th>
+            <th>Email</th>
+            <th>CRM URL</th>
             <th>Date Created</th>
             <th width="280px">Action</th>
         </tr>
-        @foreach ($projects as $project)
+        @foreach ($staffs as $staff)
             <tr>
-                <td>{{ ++$i }}</td>
-                <td>{{ $project->name }}</td>
-                <td>{{ $project->introduction }}</td>
-                <td>{{ $project->location }}</td>
-                <td>{{ $project->cost }}</td>
-                <td>{{ date_format($project->created_at, 'jS M Y') }}</td>
+                <td>{{ $staff->name }}</td>
+                <td>{{ isset( $client->user_info->first_name ) ?  $client->user_info->first_name  : ''}} {{ isset( $client->user_info->last_name ) ?  $client->user_info->last_name  : ''}} </td>
+                <td>{{ isset( $client->user_details->address ) ? $client->user_details->address : '' }}</td>
+                <td> {{ isset( $client->user_info->email ) ?  $client->user_info->email  : ''}}  </td>
+                <td> {{ isset( $client->user_info->email ) ?  $client->user_info->email  : ''}}  </td>
+                <td> {{ isset( $client->user_info->email ) ?  $client->user_info->email  : ''}}  </td>
+                <td>{{ date_format($staff->created_at, 'jS M Y') }}</td>
                 <td>
-                    <form action="{{ route('projects.destroy', $project->id) }}" method="POST">
+                    <form action="" method="POST">
 
-                        <a href="{{ route('projects.show', $project->id) }}" title="show">
+                        <a href="{{ route('staff.show', $staff->id) }}" title="show">
                             <i class="fas fa-eye text-success  fa-lg"></i>
                         </a>
 
-                        <a href="{{ route('projects.edit', $project->id) }}">
+                        <a href="{{ route('edit_staff', $staff->id) }}">
                             <i class="fas fa-edit  fa-lg"></i>
 
                         </a>
 
                         @csrf
-                        @method('DELETE')
+
+                        <a href="{{ route('delete_staff', $staff->id) }}" title="show">
+                            <i class="fas fa-eye text-success  fa-lg"></i>
+                        </a>
 
                         <button type="submit" title="delete" style="border: none; background-color:transparent;">
                             <i class="fas fa-trash fa-lg text-danger"></i>
@@ -62,6 +66,9 @@
         @endforeach
     </table>
 
-    {!! $projects->links() !!}
+ 
+    <div class="pull-center">
+        <a class="btn btn-danger" href="{{ route('logout') }}" title="Logout"> Logout <i class="fas fa-plus-circle"></i> </a>
+    </div>
 
 @endsection

@@ -21,34 +21,22 @@ class AuthController extends Controller
         $user    = new User;
  
         $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
+            'email' => 'required',
+            'password' => 'required',
         ]);
-  
+
+        $credentials = $request->only('email', 'password');
 
         if(Auth::attempt($credentials)) {
-            
-            $user = Auth::user();
-    
-            return redirect()->to('clients');
-
-            //* User Type ID for Client - 3
-
-            // if($user->user_type_id == 3) {
-
-            //     // echo $user->user_type_id;
-            
-            //     // exit;
-    
-
-            // }
+             
+            return redirect()->to('staffs');
  
         }
 
 
-       // if (!auth()->attempt($credentials)) {
+       // if (! ()->attempt($credentials)) {
 
-            return redirect('/login')->with('message', 'This User does not exist, check your details');
+        return redirect('/login')->with('message', 'This User does not exist, check your details');
 
             //return response(['message' => 'This User does not exist, check your details'], 400);
               
@@ -59,25 +47,24 @@ class AuthController extends Controller
     
     public function admin_login(Request $request){
 
-        if(Auth::attempt(['email' => $request->email, 'password' => $request->password, 'user_type_id' => 2])) { 
-        
-          $user = Auth::user();
-         
-          $email = $user->email;
-          $user_type_id = $user->user_type_id;
-        
-          return response()->json([
-            'status'   => 'success',
-            'user' => $email,
-            'user_type_id' => $user_type_id,
-          ]); 
+        $input   = $request->all();
+        $user    = new User;
+ 
+        $credentials = $request->validate([
+            'email' => 'required',
+            'password' => 'required',
+        ]);
 
-        } else { 
-          return response()->json([
-            'status' => 'error',
-            'user'   => 'Unauthorized Access'
-          ]); 
-        } 
+        $credentials = $request->only('email', 'password');
+
+        if(Auth::attempt($credentials)) {
+             
+            return redirect()->to('clients');
+ 
+        }
+
+        return redirect('admin_login')->with('message', 'This User does not exist, check your details');
+
     }
 
     public function logout (Request $request) {
@@ -117,16 +104,14 @@ class AuthController extends Controller
 
         if($existingUser){
 
-            // log them in
-
             auth()->login($existingUser, true);
+            
+            return redirect()->to('staffs');  
 
         } else {
 
             // create a new user
-            
-            //print_r($user);
-
+ 
             $newUser                  = new User;
             $newUser->first_name      = $user->user['given_name'];
             $newUser->last_name       = $user->user['family_name'];
@@ -135,8 +120,7 @@ class AuthController extends Controller
             $newUser->user_type_id    = 3;
 
             $newUser->avatar_url      = $user->avatar;
-            //$newUser->avatar_original = $user->avatar_original;
-
+ 
             $newUser->save();
          
             auth()->login($newUser, true);

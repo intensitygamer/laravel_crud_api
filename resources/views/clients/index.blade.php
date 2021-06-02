@@ -23,7 +23,7 @@
 
     <table class="table table-bordered table-responsive-lg">
         <tr>
-            <th>Client ID</th>
+            <th>Staff ID</th>
             <th>Name</th>
             <th>Address</th>
             <th>Email</th>
@@ -46,6 +46,9 @@
                             @csrf
                             @method('DELETE')      
                             <button type="submit" class="btn btn-danger">Delete</button>
+
+                            <br><br><a class="btn btn-success"  href="{{ route('client.change_password', $client->id) }}">Change Password</a>   
+
                         </form>
 
                  </td>

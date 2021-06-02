@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 01, 2021 at 07:20 AM
+-- Generation Time: Jun 02, 2021 at 11:56 AM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 8.0.5
 
@@ -42,8 +42,7 @@ CREATE TABLE `clients` (
 
 INSERT INTO `clients` (`id`, `user_id`, `name`, `created_at`, `updated_at`, `crm_url`) VALUES
 (1, 56, 'Client 1', '2021-05-13 09:28:35', '2021-05-13 09:28:35', 'client1.schedeasy.com'),
-(2, 58, 'Client 2', '2021-05-06 09:28:38', '2021-05-06 09:28:38', 'client2.schedeasy.com'),
-(3, 19, 'Client 3', '2021-05-13 09:28:36', '2021-05-13 09:28:36', 'client3.schedeasy.com');
+(2, 58, 'Client 2', '2021-05-06 09:28:38', '2021-05-06 09:28:38', 'client2.schedeasy.com');
 
 -- --------------------------------------------------------
 
@@ -222,6 +221,14 @@ CREATE TABLE `password_resets` (
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `password_resets`
+--
+
+INSERT INTO `password_resets` (`email`, `token`, `created_at`) VALUES
+('ict.cvenriquez@gmail.com', '$2y$10$14QsLdLrs/rS5Tg7XazMS.YBi4sDF/N/dUQe6KCOqjK8FfQZ.qE16', '2021-06-01 13:16:04'),
+('intensity67@gmail.com', '$2y$10$RkdjPV82J66OihUn3uvPdemtSPDU6c.QKWqFoU66nvEnKREBVzFBO', '2021-06-01 16:21:11');
+
 -- --------------------------------------------------------
 
 --
@@ -235,6 +242,13 @@ CREATE TABLE `staffs` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `staffs`
+--
+
+INSERT INTO `staffs` (`id`, `client_id`, `user_id`, `created_at`, `updated_at`) VALUES
+(1, 1, 13, '2021-06-03 08:31:15', NULL);
 
 -- --------------------------------------------------------
 
@@ -264,15 +278,12 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `user_type_id`, `first_name`, `last_name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `google_id`, `avatar_url`) VALUES
 (13, 2, 'vinz', 'enriquez', 'intensity1234123@gmail.com', NULL, '$2y$10$jxHUpT84bUyxJsKzONE21OyXHwtMbawue8NsMH6L7Yi/hUvqEjbl2', NULL, '2021-05-18 13:19:57', '2021-05-18 13:19:57', '', ''),
 (15, 2, 'Intensity312', 'Enriquez', 'vinz756@gmail.com', NULL, '$2y$10$jxHUpT84bUyxJsKzONE21OyXHwtMbawue8NsMH6L7Yi/hUvqEjbl2', NULL, '2021-05-18 14:25:26', '2021-05-18 14:25:26', '', ''),
-(19, 2, 'Elon', 'Musk', 'elon@gmail.com', NULL, '$2y$10$jxHUpT84bUyxJsKzONE21OyXHwtMbawue8NsMH6L7Yi/hUvqEjbl2', NULL, '2021-05-18 14:25:26', '2021-05-18 14:25:26', '', ''),
-(20, 4, 'Vinz', 'Enriquez', 'intensity67@gmail.com', NULL, '$2y$10$jxHUpT84bUyxJsKzONE21OyXHwtMbawue8NsMH6L7Yi/hUvqEjbl2', NULL, '2021-05-18 14:25:26', '2021-05-18 14:25:26', '', ''),
+(19, 2, 'Elon', 'Musk', 'elon@gmail.com', NULL, '$2y$12$y4azwDYtZsits.L6vlLOjubYAk5wJ2ZgaWLCMWIlq2n4b7sN9a0gC', NULL, '2021-05-18 14:25:26', '2021-05-18 14:25:26', '', ''),
 (21, 4, 'VinzStaff2', 'Staff2', 'staff@gmail.com', NULL, '$2y$10$jxHUpT84bUyxJsKzONE21OyXHwtMbawue8NsMH6L7Yi/hUvqEjbl2', NULL, '2021-05-18 14:25:26', '2021-05-18 14:25:26', '', ''),
 (22, 2, 'vinz', 'enriquez', 'inten@gmail.com', NULL, '$2y$10$NQ3Y0yrLgNnQRjo514.ZOua1D7cMlLdyCLD8LflfhkP4S1NZgXf66', NULL, '2021-05-26 12:49:22', '2021-05-26 12:49:22', '', ''),
-(54, 2, 'Vinz', 'Enriquez', 'ict.cvenriquez123@gmail.com', NULL, '$2y$10$pohZTICcn60tmGZBDlTyU.rIDKNT6g7uILGAl8WU04J8j7mUxYel2', NULL, '2021-05-27 17:46:27', '2021-05-27 17:46:27', '', ''),
+(54, 3, 'Vinz', 'Enriquez', 'ict.cvenriquez@gmail.com', NULL, '$2y$12$eLxyKr3J5SehW0fmgsD3X.bvyZoIXR9hHuKgZS4izWPrBPMitjmEq', '03q9YNEVKarUjAZroP4jGxcQg008dCwc2UzhCGgRXtSrAB5YmiSQKyNGUL0Q', '2021-05-27 17:46:27', '2021-05-27 17:46:27', '', ''),
 (55, 2, 'Vinz', 'Enriquez', 'intnsity123@gmail.com', NULL, '$2y$10$H/5RE.SONxBIcdXu/dLVJuDqSkvi2VD..y5SipRDsIEUaY90UR3eq', NULL, '2021-05-27 17:47:04', '2021-05-27 17:47:04', '', ''),
-(56, 3, 'Vinz', 'Enriquez', 'ict.cvenriquez9013@gmail.com', NULL, '$2y$10$7EB4iTsh7denjIG59JsEgecj5EzbKoIffZWNiKWiUZ0x5pZDLvRS2', NULL, '2021-05-27 17:47:54', '2021-05-29 16:20:10', '', ''),
-(58, 3, 'Clark Vincent', 'Enriquez', 'ict.cvenriquez@gmail.com', NULL, '$2y$12$NlGg49keBugLHAVi237lmOJdStUvgn.f7DIT8i8u1Wz3qz7Ardl9a', '', '2021-05-28 12:42:40', '2021-05-28 12:42:40', '101118264212738451718', ''),
-(59, 0, '', '', '', NULL, '', 'TMSkkd4f7XRteSzXiN0PSuTFbML84vusQsGR0qsjJKldeu3ovldsX0x2vdgn', NULL, NULL, '', '');
+(80, 2, 'Clark Vincent', 'Enriquez', 'intensity67@gmail.com', NULL, '$2y$12$9kwKPLoGpq2tjVk303QGz.7aBopJvfvt2jSrd2svfEBayugqKkUhK', 'Nn6S4gcMIYqv9ELVIxAKBnkyJN9TSeUsTyUe75SXMKBH0LbVHeqhbS5xN1rf', '2021-06-02 16:27:54', '2021-06-02 16:27:54', '116748296503151243895', 'https://lh3.googleusercontent.com/a-/AOh14GjiD36PPMi-ncdMp1oZuHoCfg7DymPR1ed2NWZhDg=s96-c');
 
 -- --------------------------------------------------------
 
@@ -300,7 +311,8 @@ CREATE TABLE `user_details` (
 
 INSERT INTO `user_details` (`id`, `user_id`, `address`, `street`, `house_no`, `city`, `territory`, `postal_code`, `country`, `created_at`, `updated_at`) VALUES
 (1, 56, 'Address123', 'Street123', 'House', 'City', 'Terrtitory', 'Postal', 'Philippines', '2021-05-27 17:47:54', '2021-05-29 16:20:10'),
-(2, 58, 'Address', 'Street', 'House no', 'City', 'Terrtitory', 'Postal Code', 'Philippines', '2021-05-27 17:49:01', '2021-05-27 17:49:01');
+(2, 58, 'Address', 'Street', 'House no', 'City', 'Terrtitory', 'Postal Code', 'Philippines', '2021-05-27 17:49:01', '2021-05-27 17:49:01'),
+(3, 13, 'New York', 'Woodbridge Township', 'House No 1', 'New York City', 'Territory', '6014', '', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -421,7 +433,7 @@ ALTER TABLE `user_types`
 -- AUTO_INCREMENT for table `clients`
 --
 ALTER TABLE `clients`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -445,19 +457,19 @@ ALTER TABLE `oauth_personal_access_clients`
 -- AUTO_INCREMENT for table `staffs`
 --
 ALTER TABLE `staffs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
 
 --
 -- AUTO_INCREMENT for table `user_details`
 --
 ALTER TABLE `user_details`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `user_types`

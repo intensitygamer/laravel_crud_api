@@ -20,9 +20,11 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     <style>
-        a.navbar-brand, li.nav-item a {
+    
+         a.navbar-brand {
             color: black !important;
         }
+
     </style>
 </head>
 <body>
@@ -76,6 +78,7 @@
                                 </div>
                             </li>
                         @endguest
+                        
                     </ul>
                 </div>
             </div>
