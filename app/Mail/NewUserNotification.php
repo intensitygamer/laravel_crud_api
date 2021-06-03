@@ -26,13 +26,26 @@ class NewUserNotification extends Mailable
      *
      * @return $this
      */
-    public function build()
-    {    
+    
+    public function build(){    
         
+        // return $this->from('ict.cvenriquez@gmail.com')
+        // ->view('emails.newuser'); 
+
         return $this->from('ict.cvenriquez@gmail.com')
-        ->view('emails.newuser');
+        ->to('ict.cvenriquez@gmail.com')
+        ->cc('ict.cvenriquez@gmail.com')
+           ->subject('Auf Wiedersehen')
+           ->markdown('mails.exmpl')
+           ->with([
+             'name' => 'New Mailtrap User',
+             'link' => '/inboxes/'
+           ]);
+
 
         //return $this->view('view.name');
 
     }
+
+
 }

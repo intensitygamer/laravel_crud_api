@@ -63,7 +63,7 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Street:</strong>
-                    <input type="text" name="street" class="form-control" placeholder="Street" value = {{ isset( $client->user_details->street ) ? $client->user_details->street : '' }}  >
+                    <input type="text" name="street" class="form-control" placeholder="Street" value = {{ isset( $client->user_details->street ) ? $client->user_details->street : '' }}}  >
                 </div>
             </div>
 
@@ -101,7 +101,7 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Country:</strong>
-                    <input type="text" name="country" class="form-control" placeholder="Country" value= {{ isset( $client->user_details->country ) ? $client->user_details->country : '' }} >
+                    <input type="text" name="country" class="form-control" placeholder="Country" {{ isset( $client->user_details->country ) ? $client->user_details->country : '' }} >
                 </div>
             </div>
 

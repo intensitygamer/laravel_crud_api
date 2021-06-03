@@ -29,8 +29,20 @@ class AuthController extends Controller
 
         if(Auth::attempt($credentials)) {
              
-            return redirect()->to('staffs');
- 
+            $user = User::where('email', $request->email)->first();
+
+            if($user->user_type_id == 3 ){
+
+                return redirect()->to('staffs');
+            
+            }
+                
+            if($user->user_type_id == 4){
+
+                return redirect()->to('staff_info');
+            
+            }
+
         }
 
 
@@ -56,11 +68,24 @@ class AuthController extends Controller
         ]);
 
         $credentials = $request->only('email', 'password');
+       
 
         if(Auth::attempt($credentials)) {
-             
-            return redirect()->to('clients');
- 
+           
+            $user = User::where('email', $request->email)->first();
+
+            if($user->user_type_id == 2){
+
+                return redirect()->to('clients');
+            
+            }
+
+            if( $user->user_type_id == 1){
+
+                return redirect()->to('admins');
+            
+            }
+
         }
 
         return redirect('admin_login')->with('message', 'This User does not exist, check your details');

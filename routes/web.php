@@ -72,7 +72,7 @@ Route::middleware('auth.basic')->group(function(){
         Route::get('create_client', [ 'as' => 'create_client',  'uses' => 'ClientController@create_client']);
         Route::post('save_client', [ 'as' => 'save_client',     'uses' => 'ClientController@store']);
         Route::get('client/{id}', [ 'as' => 'edit.client',      'uses' => 'ClientController@edit']);
-        Route::post('update', [ 'as' => 'update.client',        'uses' => 'ClientController@update']);
+        Route::post('update.client', [ 'as' => 'update.client',        'uses' => 'ClientController@update']);
         Route::get('clients', [ 'as' => 'clients',              'uses' => 'ClientController@index']);
         Route::get('clients_show', [ 'as' => 'clients.show',    'uses' => 'ClientController@show']);
         Route::delete('delete_client/{id}', [ 'as' => 'delete_client', 'uses' => 'ClientController@destroy']);

@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+
 use App\Models\User;
 use App\Models\Client;
 use App\Models\UserDetails;
-use Illuminate\Http\Request;
 use Validator;
 use Illuminate\Support\Facades\Hash;
     
-class ClientController extends Controller
-{   
+class AdminController extends Controller
+{
+    //
+    
     /**
      * Display a listing of the resource.
      *
@@ -24,7 +27,7 @@ class ClientController extends Controller
 
     }
 
-    
+
     public function create_client(Request $request)
     {
         
@@ -161,10 +164,10 @@ class ClientController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Client $client
+     * @param  \App\Models\User $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, Client $client)
+    public function edit(Request $request, User $user)
     {
 
         //
@@ -229,4 +232,6 @@ class ClientController extends Controller
                         ->with('success','Clients deleted successfully');
 
     }
+
+
 }
