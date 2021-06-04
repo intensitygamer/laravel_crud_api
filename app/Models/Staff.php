@@ -8,11 +8,15 @@ use Illuminate\Notifications\Notifiable;
 use App\Models\UserDetails;
 use App\Models\User;
 
+use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Activitylog\LogOptions;
+
 class Staff extends Model
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, LogsActivity;
 
     protected $table = 'staffs';
+    protected static $logName = 'staffs';
 
     /**
      * The attributes that are mass assignable.
@@ -45,5 +49,11 @@ class Staff extends Model
 
     }
 
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+        ->logOnly(['name', 'text']);
+        // Chain fluent methods for configuration options
+    }
 
 }

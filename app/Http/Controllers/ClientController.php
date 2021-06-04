@@ -20,7 +20,8 @@ class ClientController extends Controller
     {   
         $clients = Client::get();       
  
-        return view('clients.index')->with('clients', $clients);
+       // return view('clients.index')->with('clients', $clients);
+        return view('clients.index', compact('clients'));
 
     }
 
@@ -170,7 +171,11 @@ class ClientController extends Controller
         //
 
         $client = Client::find( $request->id ); 
-  
+        
+        //print_r($client);
+        
+        //exit;
+
         return view('clients.edit', compact('client'));
 
     }
@@ -189,7 +194,7 @@ class ClientController extends Controller
         //
 
         $client = Client::find( $request->id ); 
-  
+        
         return view('clients.change_password', compact('client'));
 
     }

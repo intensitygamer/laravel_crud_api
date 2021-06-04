@@ -10,9 +10,14 @@ use Laravel\Passport\HasApiTokens;
 use App\Models\UserDetails;
 use Illuminate\Database\Eloquent\Model;
 
+use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Activitylog\LogOptions;
+
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, HasApiTokens;
+    use HasFactory, Notifiable, HasApiTokens, LogsActivity;
+    
+    protected static $logName = 'users';
 
     /**
      * The attributes that are mass assignable.
@@ -49,8 +54,15 @@ class User extends Authenticatable
     public function user_details(){
 
             return $this->hasOne(UserDetails::class, 'user_id');
-            //return $this->belongsTo(UserDetails::class, 'user_id');
+            //return $this->belongsTo(UserDetails::class, 'user_id');\
 
+    }
+  
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+        ->logOnly(['name', 'text']);
+        // Chain fluent methods for configuration options
     }
 
 }

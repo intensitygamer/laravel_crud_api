@@ -12,7 +12,9 @@ use App\Models\User;
 class Admin extends Model
 {
     use HasFactory, Notifiable;
-     
+
+	protected static $logName = 'admin';
+
     public function user_info(){
 
         return $this->hasOne(User::class, 'id', 'user_id');

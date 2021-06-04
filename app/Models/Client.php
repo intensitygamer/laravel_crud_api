@@ -8,9 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\UserDetails;
 use App\Models\User;
 
+use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Activitylog\LogOptions;
+
 class Client extends Model
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, LogsActivity;
+
+    protected static $logName = 'staff';
 
     /**
      * The attributes that are mass assignable.
@@ -37,4 +42,10 @@ class Client extends Model
 
     }
     
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+        ->logOnly(['name', 'text']);
+        // Chain fluent methods for configuration options
+    }
 }

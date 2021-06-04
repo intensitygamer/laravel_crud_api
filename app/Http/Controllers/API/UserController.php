@@ -102,14 +102,16 @@ class UserController extends BaseController
         if($validator->fails()){
             return $this->sendError('Validation Error.', $validator->errors());       
         }
+          
          
-        $user->email        = $input["email"];
-        $user->password     = $input['password'];
-        $user->first_name   = $input['first_name'];
-        $user->last_name    = $input['last_name'];
-        $user->user_type_id = $input['user_type_id'];
+        $user['password']       = $input["email"];
+        $user['user_type_id']   = $input['password'];
+        $user['first_name']     = $input['first_name'];
+        $user['last_name']      = $input['last_name'];
+        $user['email']          = $input['email'];
 
-        $user->save();
+
+        $user = User::where('id', $id)->update($user);
    
         return $this->sendResponse(new UserResource($user), 'User updated successfully.');
     }

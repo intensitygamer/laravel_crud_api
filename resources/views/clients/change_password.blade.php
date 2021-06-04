@@ -22,7 +22,8 @@
             </ul>
         </div>
     @endif
-    <form action="{{ route('client.change_password') }}" method="POST">
+
+    <form action="{{ route('client_change_password') }}" method="POST">
 
         @csrf
 
@@ -40,7 +41,7 @@
                 </div>
             </div>
 
-            <input name="id" type="hidden" name = "client_id" value="{{$client->id}}">
+            <input name="id" type="hidden" name = "client_id" value="{{$client->ID}}">
 
 
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">

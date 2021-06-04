@@ -23,7 +23,7 @@
 
     <table class="table table-bordered table-responsive-lg">
         <tr>
-            <th>Staff ID</th>
+            <th>Client ID</th>
             <th>Name</th>
             <th>Address</th>
             <th>Email</th>
@@ -40,13 +40,18 @@
                 <td>{{ $client->crm_url }}</td>
                 <td>{{ date_format($client->created_at, 'jS M Y') }}</td>
                 <td> 
-                        <form action="{{ route('delete_client',$client->id) }}" method="POST">   
-                            <a class="btn btn-info" href="{{ route('clients.show', $client->id) }}">Show</a>    
-                            <a class="btn btn-primary"  href="{{ route('edit.client', $client->id) }}">Edit</a>   
+
+                            <form action="{{ route('delete_client',$client->id) }}" method="POST">   
                             @csrf
+
+                            <a class="btn btn-info" href="{{ route('clients.show', $client->id) }}">Show</a>    
+
+                            <a class="btn btn-primary"  href="{{ route('edit.client', $client->id) }}">Edit</a>
+
                             @method('DELETE')      
                             <button type="submit" class="btn btn-danger">Delete</button>
 
+                            
                             <br><br><a class="btn btn-success"  href="{{ route('client.change_password', $client->id) }}">Change Password</a>   
 
                         </form>

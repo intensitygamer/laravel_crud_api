@@ -79,7 +79,7 @@ Route::middleware('auth.basic')->group(function(){
 
         Route::get('client_change_password/{id}', [ 'as' => 'client.change_password',      'uses' => 'ClientController@change_password']);
 
-        Route::post('client_change_password', [ 'as' => 'client.change_password',      'uses' => 'ClientController@update_password']);
+        Route::post('client_change_password', [ 'as' => 'client_change_password',      'uses' => 'ClientController@update_password']);
 
     });
 
