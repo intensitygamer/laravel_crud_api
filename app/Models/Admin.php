@@ -27,5 +27,11 @@ class Admin extends Model
  
     }  
     
-
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+        ->setDescriptionForEvent(fn(string $eventName) => "This model has been {$eventName}");
+        // Chain fluent methods for configuration options
+    }
+    
 }

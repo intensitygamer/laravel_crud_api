@@ -16,6 +16,16 @@ class UserDetails extends Model
     protected static $logName = 'user_details';
 
 
+    protected static $logAttributes = [
+        'address',
+        'street',
+        'house_no',
+        'city',
+        'territory',
+        'postal_code',
+        'country'
+    ];
+
     /**
      * The attributes that are mass assignable.
      *
@@ -37,7 +47,8 @@ class UserDetails extends Model
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()
-        ->logOnly(['name', 'text']);
+        ->setDescriptionForEvent(fn(string $eventName) => "This model has been {$eventName}");
+
         // Chain fluent methods for configuration options
     }
 

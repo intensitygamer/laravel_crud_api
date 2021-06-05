@@ -28,6 +28,10 @@ class Staff extends Model
         'user_id',    
     ];
 
+    protected static $logAttributes = [
+        'client_id'
+    ];
+
 
     public function user_info(){
 
@@ -52,7 +56,7 @@ class Staff extends Model
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()
-        ->logOnly(['name', 'text']);
+        ->setDescriptionForEvent(fn(string $eventName) => "This model has been {$eventName}");
         // Chain fluent methods for configuration options
     }
 

@@ -19,6 +19,14 @@ class User extends Authenticatable
     
     protected static $logName = 'users';
 
+    protected static $logAttributes = [
+        'email',
+        'password',
+        'first_name',
+        'last_name',
+        'user_type_id'
+    ];
+
     /**
      * The attributes that are mass assignable.
      *
@@ -61,7 +69,8 @@ class User extends Authenticatable
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()
-        ->logOnly(['name', 'text']);
+        ->setDescriptionForEvent(fn(string $eventName) => "This model has been {$eventName}");
+
         // Chain fluent methods for configuration options
     }
 

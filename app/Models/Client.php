@@ -28,6 +28,10 @@ class Client extends Model
         'crm_url',    
     ];
 
+    protected static $logAttributes = [
+        'name',    
+        'crm_url',    
+    ];
 
     public function user_info(){
 
@@ -45,7 +49,8 @@ class Client extends Model
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()
-        ->logOnly(['name', 'text']);
+        ->setDescriptionForEvent(fn(string $eventName) => "This model has been {$eventName}");
+
         // Chain fluent methods for configuration options
     }
 }
