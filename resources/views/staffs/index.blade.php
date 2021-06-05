@@ -36,28 +36,22 @@
                 <td>    {{ isset( $staff->user_info->email ) ?  $staff->user_info->email  : ''}}  </td>
                 <td>    {{ date_format($staff->created_at, 'jS M Y') }}</td>
                 <td>
-                    <form action="" method="POST">
+                        <form action="{{ route('delete.client', [ 'id'=> $staff->id ]) }}" method="POST" >
 
-                        @csrf
+                        <a class="btn btn-info" href="{{ route('staff.show', $staff->id) }}">View</a>    
 
-                        <a href="{{ route('staff.show', $staff->id) }}" title="show">
-                            <i class="fas fa-eye text-success fa-lg"></i>
-                        </a>
+                        <a class="btn btn-primary"  href="{{ route('edit.client', $staff->id) }}">Edit</a>
+                                
+                            <input name="id" type="hidden" name = "client_id" value="{{$staff->id}}">
 
-                        <a href="{{ route('edit_staff', $staff->id) }}">
-                            <i class="fas fa-edit fa-lg"></i>
+                            <input type="hidden" name="_method" value="DELETE">
+                                @csrf
+                            <button type = 'submit' class="btn btn-danger" > Delete </button>
 
-                        </a>
+                        </form>
 
-                        <a href="{{ route('delete_staff', $staff->id) }}" title="show">
-                            <i class="fas fa-eye text-success fa-lg"></i>
-                        </a>
+                        <br><br><a class="btn btn-success"  href="{{ route('client.change_password', $staff->id) }}">Change Password</a>   
 
-                        <button type="submit" title="delete" style="border: none; background-color:transparent;">
-                            <i class="fas fa-trash fa-lg text-danger"></i>
-
-                        </button>
-                    </form>
                 </td>
             </tr>
         @endforeach

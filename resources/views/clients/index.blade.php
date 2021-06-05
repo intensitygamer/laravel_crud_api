@@ -41,7 +41,7 @@
                 <td>{{ date_format($client->created_at, 'jS M Y') }}</td>
                 <td> 
 
-                            <a class="btn btn-info" href="{{ route('clients.show', $client->id) }}">Show</a>    
+                            <a class="btn btn-info" href="{{ route('clients.show', $client->id) }}">View</a>    
 
                             <a class="btn btn-primary"  href="{{ route('edit.client', $client->id) }}">Edit</a>
                             

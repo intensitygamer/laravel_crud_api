@@ -8,12 +8,16 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Auth;
 use Laravel\Socialite\Facades\Socialite;
- 
 use Validator;
+
+
+
+use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Activitylog\LogOptions;
 
 class AuthController extends Controller
 {
-    //
+    use LogsActivity;
 
     public function login(Request $request){
         
@@ -28,16 +32,25 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
 
         if(Auth::attempt($credentials)) {
-             
+            
+ 
             $user = User::where('email', $request->email)->first();
 
+            // Client Log In
+
             if($user->user_type_id == 3 ){
+    
+                activity()->log('Client Log In');
 
                 return redirect()->to('staffs');
             
             }
-                
+            
+            // Staff Log In
+
             if($user->user_type_id == 4){
+
+                activity()->log('Client Log In');
 
                 return redirect()->to('staff_info');
             
@@ -45,15 +58,8 @@ class AuthController extends Controller
 
         }
 
-
-       // if (! ()->attempt($credentials)) {
-
         return redirect('/login')->with('message', 'This User does not exist, check your details');
-
-            //return response(['message' => 'This User does not exist, check your details'], 400);
-              
-       // }
-
+        
 
     }
     
@@ -100,6 +106,8 @@ class AuthController extends Controller
         //
 
         Auth::logout();
+        
+        //activity()->log('Logged In')->performedOn('App\Models\User');
 
         // $response = ['message' => 'You have been successfully logged out!'];
 
