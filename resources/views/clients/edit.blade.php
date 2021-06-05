@@ -45,13 +45,6 @@
                     <input type="text" name="email" class="form-control" placeholder="Email" value =  {{ isset( $client->user_info->email ) ? $client->user_info->email : '' }}>
                 </div>
             </div>
-<!-- 
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Password:</strong>
-                    <input type="password" name="password" class="form-control" placeholder="Password" >
-                </div>
-            </div> -->
 
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
@@ -105,10 +98,17 @@
                 </div>
             </div>
 
-              <input name="id" type="hidden" name = "client_id" value="{{$client->id}}">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>CRM Url:</strong>
+                    <input type="text" name="crm_url" class="form-control" placeholder="CRM Url">
+                </div>
+            </div>
+            
+            <input name="id" type="hidden" name = "client_id" value="{{$client->id}}">
 
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                <button type="submit" class="btn btn-primary">Update</button>
+                <button type="submit" class="btn btn-primary">Update Client</button>
             </div>
         </div>
 

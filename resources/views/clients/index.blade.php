@@ -41,27 +41,28 @@
                 <td>{{ date_format($client->created_at, 'jS M Y') }}</td>
                 <td> 
 
-                            <form action="{{ route('delete_client',$client->id) }}" method="POST">   
-                            @csrf
-
                             <a class="btn btn-info" href="{{ route('clients.show', $client->id) }}">Show</a>    
 
                             <a class="btn btn-primary"  href="{{ route('edit.client', $client->id) }}">Edit</a>
-
-                            @method('DELETE')      
-                            <button type="submit" class="btn btn-danger">Delete</button>
-
                             
+                            <form action="{{ route('delete.client', [ 'id'=> $client->id ]) }}" method="POST" >
+
+                                <button type = 'submit' class="btn btn-danger" > Delete </button>
+                                
+                                <input name="id" type="hidden" name = "client_id" value="{{$client->id}}">
+
+                                <input type="hidden" name="_method" value="DELETE">
+                                 @csrf
+                            </form>
+
                             <br><br><a class="btn btn-success"  href="{{ route('client.change_password', $client->id) }}">Change Password</a>   
-
-                        </form>
-
+ 
                  </td>
 
             </tr>
         @endforeach
+        
     </table>
-
     
     <div class="pull-center">
         <a class="btn btn-danger" href="{{ route('logout') }}" title="Logout"> Logout <i class="fas fa-plus-circle"></i> </a>

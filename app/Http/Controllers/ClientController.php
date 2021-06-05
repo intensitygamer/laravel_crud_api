@@ -56,8 +56,10 @@ class ClientController extends Controller
         ]);
         
         if($validator->fails()){
+ 
 
-            return view('clients.create')->with('errors', $validator->errors() );
+            return redirect()->route('clients.create')
+            ->with('errors', $validator->errors() );
 
         }
 
@@ -72,7 +74,7 @@ class ClientController extends Controller
 
         $user_details['user_id']        = $user_result->id ;
         $user_details['address']        = $input['address']  ;
-        $user_details['street']        = $input['street']  ;
+        $user_details['street']         = $input['street']  ;
         $user_details['house_no']       = $input['house_no'] ;
         $user_details['city']           = $input['city'] ;
         $user_details['territory']      = $input['territory'] ;
@@ -81,7 +83,8 @@ class ClientController extends Controller
  
         UserDetails::create($user_details);
 
-        return view('clients.index');
+        return redirect()->route('clients')
+                        ->with('success','Clients added successfully');
 
     }
 
@@ -127,7 +130,8 @@ class ClientController extends Controller
   
         if($validator->fails()){
 
-            return view('clients.create')->with('errors', $validator->errors() );
+            return redirect()->route('update.client')
+            ->with('success','Clients updated successfully');
 
         }
 
@@ -168,14 +172,8 @@ class ClientController extends Controller
     public function edit(Request $request, Client $client)
     {
 
-        //
-
         $client = Client::find( $request->id ); 
         
-        //print_r($client);
-        
-        //exit;
-
         return view('clients.edit', compact('client'));
 
     }
@@ -222,7 +220,6 @@ class ClientController extends Controller
      */
     public function destroy(Request $request, Client $client)
     { 
-        //
 
         $id = $request->id;
 

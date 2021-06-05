@@ -6,6 +6,11 @@ use Laravel\Socialite\Facades\Socialite;
 
 use HTTP\Controllers\API\AuthController as AuthController;
 
+
+use App\Mail\MailtrapExample;
+use Illuminate\Support\Facades\Mail;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,6 +21,14 @@ use HTTP\Controllers\API\AuthController as AuthController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('/send-mail', function () {
+
+    Mail::to('ict.cvenriquez@example.com')->send(new MailtrapExample());
+
+    return 'A message has been sent to Mailtrap!';
+
+});
 
 Route::get('/', function () {
 
@@ -72,14 +85,14 @@ Route::middleware('auth.basic')->group(function(){
         Route::get('create_client', [ 'as' => 'create_client',  'uses' => 'ClientController@create_client']);
         Route::post('save_client', [ 'as' => 'save_client',     'uses' => 'ClientController@store']);
         Route::get('client/{id}', [ 'as' => 'edit.client',      'uses' => 'ClientController@edit']);
-        Route::post('update.client', [ 'as' => 'update.client',        'uses' => 'ClientController@update']);
+        Route::post('update.client', [ 'as' => 'update.client', 'uses' => 'ClientController@update']);
         Route::get('clients', [ 'as' => 'clients',              'uses' => 'ClientController@index']);
         Route::get('clients_show', [ 'as' => 'clients.show',    'uses' => 'ClientController@show']);
-        Route::delete('delete_client/{id}', [ 'as' => 'delete_client', 'uses' => 'ClientController@destroy']);
+        Route::delete('delete.client', [ 'as' => 'delete.client', 'uses' => 'ClientController@destroy']);
 
-        Route::get('client_change_password/{id}', [ 'as' => 'client.change_password',      'uses' => 'ClientController@change_password']);
+        Route::get('client_change_password/{id}', [ 'as' => 'client.change_password',   'uses' => 'ClientController@change_password']);
 
-        Route::post('client_change_password', [ 'as' => 'client_change_password',      'uses' => 'ClientController@update_password']);
+        Route::post('client_change_password', [ 'as' => 'client_change_password',   'uses' => 'ClientController@update_password']);
 
     });
 
