@@ -101,10 +101,17 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>CRM Url:</strong>
-                    <input type="text" name="crm_url" class="form-control" placeholder="CRM Url">
+                    <input type="text" name="crm_url" class="form-control" placeholder="CRM Url" value =  {{ isset( $client->crm_url ) ? $client->crm_url : '' }}>
                 </div>
             </div>
             
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Client Name:</strong>
+                    <input type="text" name="client_name" class="form-control" placeholder="Client Name" value =  {{ isset( $client->name ) ? $client->name : '' }}>
+                </div>
+            </div>
+
             <input name="id" type="hidden" name = "client_id" value="{{$client->id}}">
 
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">

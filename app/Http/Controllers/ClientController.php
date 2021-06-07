@@ -63,13 +63,13 @@ class ClientController extends Controller
 
         }
 
-        $user_inputs['email']          = $input["email"];
-        $user_inputs['password']       = Hash::make($input['password']);
-        $user_inputs['first_name']     = $input['first_name'];
-        $user_inputs['last_name']      = $input['last_name'];
-        $user_inputs['user_type_id']   = 2;
+        $user_updates['email']          = $input["email"];
+        $user_updates['password']       = Hash::make($input['password']);
+        $user_updates['first_name']     = $input['first_name'];
+        $user_updates['last_name']      = $input['last_name'];
+        $user_updates['user_type_id']   = 2;
 
-        $user_result                   = User::create($user_inputs);
+        $user_result                   = User::create($user_updates);
         $user_id                       = $user_result->id;
 
         $user_details['user_id']        = $user_result->id ;
@@ -135,14 +135,20 @@ class ClientController extends Controller
 
         }
 
-        $user_inputs['email']          = $input["email"];
-        $user_inputs['first_name']     = $input['first_name'];
-        $user_inputs['last_name']      = $input['last_name'];
-        //$user_inputs['user_type_id']   = 2;
+        $user_updates['email']          = $input["email"];
+        $user_updates['first_name']     = $input['first_name'];
+        $user_updates['last_name']      = $input['last_name'];
 
-        User::where('id', $request->id)->update($user_inputs);
- 
-       //$user_details['user_id']        = $user_result->id ;
+        $user = User::find('id', $request->id);
+
+        print_r($user->user_type_id);
+        
+        exit;
+
+        // $user_result                   = User::create($user_updates);
+        // $user_id                       = $user_result->id;
+    
+
         $user_details['address']        = $input['address']  ;
         $user_details['street']         = $input['street']  ;
         $user_details['house_no']       = $input['house_no'] ;
@@ -150,12 +156,13 @@ class ClientController extends Controller
         $user_details['territory']      = $input['territory'] ;
         $user_details['postal_code']    = $input['postal_code'] ;
         $user_details['country']        = $input['country'] ;
-        
-        echo $request->id;
  
         UserDetails::where('user_id', $request->id)->update($user_details);
 
-        //$client->update($request->all());
+        $client_details['crm_url']    = $input['crm_url'] ;
+        $client_details['name']       = $input['client_name'] ;
+
+        Client::where('user_id', $request->id)->update($client_details);
     
         return redirect()->route('clients')
                         ->with('success','Clients updated successfully');
@@ -204,7 +211,7 @@ class ClientController extends Controller
 
         $client = Client::find( $request->id ); 
   
-        User::where('id', $request->id)->update($user_inputs);
+        User::where('id', $request->id)->update($user_updates);
  
         return view('clients', compact('client'));
 

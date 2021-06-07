@@ -9,8 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Auth;
 use Laravel\Socialite\Facades\Socialite;
 use Validator;
-
-
+ 
 
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Activitylog\LogOptions;
@@ -32,8 +31,7 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
 
         if(Auth::attempt($credentials)) {
-            
- 
+         
             $user = User::where('email', $request->email)->first();
 
             // Client Log In
@@ -50,7 +48,7 @@ class AuthController extends Controller
 
             if($user->user_type_id == 4){
 
-                activity()->log('Client Log In');
+                activity()->log('Staff Log In');
 
                 return redirect()->to('staff_info');
             
@@ -79,14 +77,19 @@ class AuthController extends Controller
         if(Auth::attempt($credentials)) {
            
             $user = User::where('email', $request->email)->first();
+            
 
             if($user->user_type_id == 2){
+    
+                activity()->log('Admin Log In');
 
                 return redirect()->to('clients');
             
             }
 
             if( $user->user_type_id == 1){
+
+                activity()->log('Master Admin Log In');
 
                 return redirect()->to('admins');
             
@@ -99,19 +102,10 @@ class AuthController extends Controller
     }
 
     public function logout (Request $request) {
-
-        // $token = $request->user()->token();
-        // $token->revoke();
-        //
-        //
-
+ 
         Auth::logout();
         
-        //activity()->log('Logged In')->performedOn('App\Models\User');
-
-        // $response = ['message' => 'You have been successfully logged out!'];
-
-        // return response($response, 200);
+        activity()->log('User Log Out');
 
         return redirect()->to('login')->with('error', 'You have been successfully logged out!');;
 
@@ -127,7 +121,8 @@ class AuthController extends Controller
         }
 
         // only allow people with @company.com to login
-        // if(explode("@", $user->email)[1] !== 'company.com'){
+
+        // if(explode("@", $user->email)[1] !== 'schedeasy.com'){
         //     return redirect()->to('/');
         // }
 
@@ -136,6 +131,8 @@ class AuthController extends Controller
         $existingUser = User::where('email', $user->email)->first();
 
         if($existingUser){
+
+            activity()->log('Google Auth Login');
 
             auth()->login($existingUser, true);
             
@@ -155,9 +152,13 @@ class AuthController extends Controller
             $newUser->avatar_url      = $user->avatar;
  
             $newUser->save();
-         
+            
+            activity()->log('Google Auth Register');
+
             auth()->login($newUser, true);
             
+            activity()->log('Google Auth Login');
+
             return redirect()->to('/clients');
 
         }

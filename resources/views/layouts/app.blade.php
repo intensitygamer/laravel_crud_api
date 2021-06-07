@@ -21,7 +21,7 @@
 
     <style>
     
-         a.navbar-brand {
+         a.navbar-brand, .nav-item a {
             color: black !important;
         }
 
@@ -39,14 +39,39 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-
-                    </ul>
 
                     <!-- Right Side Of Navbar -->
+                
                     <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
+
+                        @if (Auth::user()->user_type_id == 3)
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('staffs') }}">Staffs</a>
+                            </li>
+                             
+                        @endif  
+
+                        @if (Auth::user()->user_type_id == 2)
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('staffs') }}">Clients</a>
+                            </li>
+ 
+                        @endif  
+
+                        @if (Auth::user()->user_type_id == 1)
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('staffs') }}">Admins</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('staffs') }}"> User Activity </a>
+                            </li>
+ 
+                        @endif  
+
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
@@ -79,7 +104,9 @@
                             </li>
                         @endguest
                         
+                    
                     </ul>
+
                 </div>
             </div>
         </nav>
