@@ -1,7 +1,11 @@
 <!doctype html>
+
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
+
     <meta charset="utf-8">
+    
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- CSRF Token -->
@@ -26,8 +30,11 @@
         }
 
     </style>
+
 </head>
+
 <body>
+
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
@@ -44,32 +51,36 @@
                 
                     <ul class="navbar-nav ml-auto">
 
-                        @if (Auth::user()->user_type_id == 3)
+                        @if (!Auth::guest())
 
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('staffs') }}">Staffs</a>
-                            </li>
-                             
-                        @endif  
+                            @if (Auth::user()->user_type_id == 3)
 
-                        @if (Auth::user()->user_type_id == 2)
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('staffs') }}">Staffs</a>
+                                </li>
+                                 
+                            @endif  
 
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('staffs') }}">Clients</a>
-                            </li>
- 
-                        @endif  
+                            @if (Auth::user()->user_type_id == 2)
 
-                        @if (Auth::user()->user_type_id == 1)
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('staffs') }}">Clients</a>
+                                </li>
+     
+                            @endif  
 
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('staffs') }}">Admins</a>
-                            </li>
+                            @if (Auth::user()->user_type_id == 1)
 
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('staffs') }}"> User Activity </a>
-                            </li>
- 
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('staffs') }}">Admins</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('staffs') }}"> User Activity </a>
+                                </li>
+     
+                            @endif  
+                        
                         @endif  
 
                         @guest
@@ -112,8 +123,13 @@
         </nav>
 
         <main class="py-4">
+
             @yield('content')
+
         </main>
+
     </div>
+
 </body>
+
 </html>

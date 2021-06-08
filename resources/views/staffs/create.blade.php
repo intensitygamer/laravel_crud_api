@@ -1,15 +1,22 @@
 @extends('layouts.app')
 
 @section('content')
+
     <div class="row">
-        <div class="col-lg-12 margin-tb">
-            <div class="pull-left">
-                <h2>Add New Staff</h2>
+
+        <div class="container">
+
+            <div class="col-lg-12 margin-tb">
+                <div class="pull-left">
+                    <h2>Add New Staff</h2>
+                </div>
+                <div class="pull-right">
+                    <a class="btn btn-primary" href="{{ route('clients') }}" title="Go back">Back</i> </a>
+                </div>
             </div>
-            <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('clients') }}" title="Go back">Back</i> </a>
-            </div>
+        
         </div>
+
     </div>
 
     @if ($errors->any())
