@@ -89,10 +89,10 @@ Route::middleware('auth.basic')->group(function(){
         Route::get('clients', [ 'as' => 'clients',              'uses' => 'ClientController@index']);
         Route::get('clients_show', [ 'as' => 'clients.show',    'uses' => 'ClientController@show']);
         Route::delete('delete.client', [ 'as' => 'delete.client', 'uses' => 'ClientController@destroy']);
-
         Route::get('client_change_password/{id}', [ 'as' => 'client.change_password',   'uses' => 'ClientController@change_password']);
-
         Route::post('client_change_password', [ 'as' => 'client_change_password',   'uses' => 'ClientController@update_password']);
+
+        Route::get('actvity', [ 'as' => 'activity',              'uses' => 'ActivityController@index']);
 
     });
 

@@ -114,6 +114,8 @@
 
             <input name="id" type="hidden" name = "client_id" value="{{$client->id}}">
 
+            <input name="user_id" type="hidden" name = "client_id" value="{{$client->user_id}}">
+
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                 <button type="submit" class="btn btn-primary">Update Client</button>
             </div>

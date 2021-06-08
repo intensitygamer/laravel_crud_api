@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Client;
+
+
 use Illuminate\Support\Facades\Hash;
 use Auth;
 use Laravel\Socialite\Facades\Socialite;
@@ -22,6 +25,7 @@ class AuthController extends Controller
         
         $input   = $request->all();
         $user    = new User;
+        $client  = new Client;
  
         $credentials = $request->validate([
             'email' => 'required',
@@ -38,7 +42,11 @@ class AuthController extends Controller
 
             if($user->user_type_id == 3 ){
     
-                activity()->log('Client Log In');
+                activity()->log('Client Log In');  
+
+                $client_info = $client->where('user_id', $user->id)->first();       
+                 
+                $request->session()->put('client_info', $client);
 
                 return redirect()->to('staffs');
             
@@ -78,7 +86,6 @@ class AuthController extends Controller
            
             $user = User::where('email', $request->email)->first();
             
-
             if($user->user_type_id == 2){
     
                 activity()->log('Admin Log In');
@@ -104,7 +111,8 @@ class AuthController extends Controller
     public function logout (Request $request) {
  
         Auth::logout();
-        
+        $request->session()->flush();
+
         activity()->log('User Log Out');
 
         return redirect()->to('login')->with('error', 'You have been successfully logged out!');;

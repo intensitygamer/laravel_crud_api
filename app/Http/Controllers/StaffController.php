@@ -20,9 +20,9 @@ class StaffController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {   
-        $staffs = Staff::get();       
+        $staffs = Staff::get();
          
         return view('staffs.index')->with('staffs', $staffs);
 

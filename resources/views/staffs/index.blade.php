@@ -8,16 +8,16 @@
 
             <div class="col-lg-12 margin-tb">
 
-                <div class="pull-left">
-                    <h2> Staffs </h2>
+                    <div class="pull-left">
+                        <h2> Staffs </h2>
+                    </div>
+
+                    <a class="btn btn-success" href="{{ route('create_staff') }}" title="Staff Project"> <i class="fas fa-plus-circle"></i>Add Staff
+                    </a>
+
                 </div>
 
-                <a class="btn btn-success" href="{{ route('create_staff') }}" title="Staff Project"> <i class="fas fa-plus-circle"></i>Add Staff
-                </a>
-
-             </div>
-
-        </div>
+            </div>
 
     </div>
 
@@ -51,6 +51,8 @@
                         <td>
                                 <form action="{{ route('delete.client', [ 'id'=> $staff->id ]) }}" method="POST" >
 
+                                @csrf
+    
                                 <a class="btn btn-info" href="{{ route('staff.show', $staff->id) }}">View</a>    
 
                                 <a class="btn btn-primary"  href="{{ route('edit.client', $staff->id) }}">Edit</a>
@@ -58,7 +60,7 @@
                                     <input name="id" type="hidden" name = "client_id" value="{{$staff->id}}">
 
                                     <input type="hidden" name="_method" value="DELETE">
-                                        @csrf
+
                                     <button type = 'submit' class="btn btn-danger" > Delete </button>
 
                                 </form>

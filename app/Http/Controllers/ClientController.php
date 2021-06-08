@@ -7,8 +7,7 @@ use App\Models\Client;
 use App\Models\UserDetails;
 use Illuminate\Http\Request;
 use Validator;
-use Illuminate\Support\Facades\Hash;
-    
+
 class ClientController extends Controller
 {   
     /**
@@ -16,11 +15,12 @@ class ClientController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {   
         $clients = Client::get();       
- 
-       // return view('clients.index')->with('clients', $clients);
+        
+        $client_info = $request->session()->get('client_info');
+
         return view('clients.index', compact('clients'));
 
     }
@@ -138,12 +138,9 @@ class ClientController extends Controller
         $user_updates['email']          = $input["email"];
         $user_updates['first_name']     = $input['first_name'];
         $user_updates['last_name']      = $input['last_name'];
-
-        $user = User::find('id', $request->id);
-
-        print_r($user->user_type_id);
         
-        exit;
+        
+        $user = User::where('id', $request->user_id)->first();
 
         // $user_result                   = User::create($user_updates);
         // $user_id                       = $user_result->id;

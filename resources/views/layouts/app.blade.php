@@ -64,22 +64,26 @@
                             @if (Auth::user()->user_type_id == 2)
 
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('staffs') }}">Clients</a>
+                                    <a class="nav-link" href="{{ route('clients') }}">Clients</a>
                                 </li>
      
                             @endif  
 
-                            @if (Auth::user()->user_type_id == 1)
+                            @if(Auth::user()->user_type_id == 1)
 
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('staffs') }}">Admins</a>
+                                    <a class="nav-link" href="{{ route('admins') }}">Admins</a>
                                 </li>
 
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('staffs') }}"> User Activity </a>
-                                </li>
-     
                             @endif  
+
+                            @if(Auth::user()->user_type_id == 1 || Auth::user()->user_type_id == 2)
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('activity') }}"> Activity </a>
+                                </li>
+
+                            @endif
                         
                         @endif  
 
@@ -118,11 +122,36 @@
                     
                     </ul>
 
-                </div>
             </div>
         </nav>
 
+
         <main class="py-4">
+
+        <div class='col col-12'>
+            
+            @if (!Auth::guest() && Auth::user()->user_type_id == 3) 
+                 
+                <h4> Client Info </h4>
+
+                <table class = 'table table-striped'> 
+                    
+                    <tr><td>    Client Name: <td> {{ Auth::user()->get_client_details(Auth::id())->name}}
+                    <tr><td>    CRM Url: <td> {{ Auth::user()->get_client_details(Auth::id())->crm_url}}
+                    
+                </table>
+
+                <form action = "schedeasy.com/" method = 'POST'> 
+                    
+                    <button type= 'submit' class = 'btn btn-info'> Login through CRM </button>
+
+                     @csrf
+    
+                </form>
+
+            @endif  
+            
+        </div>
 
             @yield('content')
 

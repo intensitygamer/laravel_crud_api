@@ -10,6 +10,13 @@ use Laravel\Passport\HasApiTokens;
 use App\Models\UserDetails;
 use Illuminate\Database\Eloquent\Model;
 
+
+use App\Models\Client;
+use App\Models\Staff;
+use App\Models\Admin;
+
+
+
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Activitylog\LogOptions;
 
@@ -66,6 +73,13 @@ class User extends Authenticatable
 
     }
   
+    public function get_client_details($user_id){
+ 
+        return Client::where('user_id', $user_id)->first();
+
+    }
+
+
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()
