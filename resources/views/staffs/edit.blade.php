@@ -63,7 +63,7 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Street:</strong>
-                    <input type="text" name="street" class="form-control" placeholder="Street" value = {{ isset( $staff->user_details->street ) ? $staff->user_details->street : '' }}}  >
+                    <input type="text" name="street" class="form-control" placeholder="Street" value = {{ isset( $staff->user_details->street ) ? $staff->user_details->street : '' }} >
                 </div>
             </div>
 
@@ -105,7 +105,7 @@
                 </div>
             </div>
 
-              <input name="id" type="hidden" value="{{$staff->id}}">
+              <input name="id" type="hidden" value="{{  isset( $staff->id ) ? $staff->id : '' }}">
 
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                 <button type="submit" class="btn btn-primary">Update Staff</button>

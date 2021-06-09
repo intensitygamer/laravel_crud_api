@@ -78,15 +78,15 @@
                 <td>    {{ isset( $staff->user_info->email ) ?  $staff->user_info->email  : ''}}  </td>
                 <td>    {{ date_format($staff->created_at, 'jS M Y') }}</td>
                 <td>
-                        <form action="{{ route('delete.client', [ 'id'=> $staff->id ]) }}" method="POST" >
+                        <form action="{{ route('delete.staff', [ 'id'=> $staff->id ]) }}" method="POST" >
 
                         @csrf
 
                         <a class="btn btn-info" href="{{ route('staff.show', $staff->id) }}">View</a>    
 
-                        <a class="btn btn-primary"  href="{{ route('edit.client', $staff->id) }}">Edit</a>
+                        <a class="btn btn-primary"  href="{{ route('edit.staff', $staff->id) }}">Edit</a>
                                 
-                            <input name="id" type="hidden" name = "client_id" value="{{$staff->id}}">
+                            <input name="id" type="hidden" name = "staff_id" value="{{$staff->id}}">
 
                             <input type="hidden" name="_method" value="DELETE">
 

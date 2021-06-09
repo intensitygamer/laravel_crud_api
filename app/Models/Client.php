@@ -51,7 +51,7 @@ class Client extends Model
     
     public function crm_token_id()
     {
-        return TokenHelper::activationCode(array( 'length' => 12, 'alphanumeric' => false));
+        return TokenHelper::activationCode(array( 'length' => 30, 'alphanumeric' => true));
     }
 
     public function user_info(){

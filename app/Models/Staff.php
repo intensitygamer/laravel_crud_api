@@ -29,7 +29,7 @@ class Staff extends Model
     ];
 
     protected static $logAttributes = [
-        'client_id'
+        'client_id',
     ];
 
 

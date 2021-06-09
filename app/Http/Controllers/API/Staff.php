@@ -4,23 +4,19 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
-use App\Models\Client;
-use App\Models\User;
-use App\Models\UserDetails;
 use App\Http\Controllers\API\BaseController as BaseController;
-    
+use Validator;
 use Illuminate\Support\Facades\Hash;
 
-use Validator;
-use App\Http\Resources\Client as ClientResource;
+use App\Models\User;
+ 
+use App\Models\Client;
 
 
-
-class ClientController extends Controller
+class Staff extends Controller
 {
     //
-       /**
+        /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -29,13 +25,14 @@ class ClientController extends Controller
     {
         //
          
-        $users = User::where('user_type_id' , 2)->get();
+        
+        $staffs = User::where('user_type_id' , 4)->get();
  
-        if (is_null($users)) {
+        if (is_null($staffs)) {
             return $this->sendError('User not found.');
         }
 
-         return response(['users' => $users], 201);
+        return response(['staffs' => $staffs], 201);
 
     }
 
@@ -47,40 +44,72 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // 
+ 
         $input = $request->all();
-   
+        $user  = new User();
+ 
+        //$client_info->
+
         $validator = Validator::make($input, [
             'first_name' => 'required',
             'last_name' => 'required',
-            'email' => 'required',
+            'email' => 'required|unique:users',
             'password' => 'required'
         ]);
         
-        $user['password']       = Hash::make($input['password']);
-        $user['user_type_id']   = 2;
-        $user['first_name']     = $input['first_name'];
-        $user['last_name']      = $input['last_name'];
-        $user['email']          = $input['email'];
-        
+        if($validator->fails()){
 
-    
+            return view('clients.create')->with('errors', $validator->errors() );
+
+        }
+
+        $user_inputs['email']          = $input["email"];
+        $user_inputs['password']       = Hash::make($input['password']);
+        $user_inputs['first_name']     = $input['first_name'];
+        $user_inputs['last_name']      = $input['last_name'];
+        $user_inputs['user_type_id']   = 2;
+
+        $user_result                   = User::create($user_inputs);
+        $user_id                       = $user_result->id;
+
+        $user_details['user_id']        = $user_result->id ;
+        $user_details['address']        = $input['address']  ;
+        $user_details['street']        = $input['street']  ;
+        $user_details['house_no']       = $input['house_no'] ;
+        $user_details['city']           = $input['city'] ;
+        $user_details['territory']      = $input['territory'] ;
+        $user_details['postal_code']    = $input['postal_code'] ;
+        $user_details['country']        = $input['country'] ;
+ 
+        UserDetails::create($user_details);
+
+        $input['password'] = Hash::make($input['password']);
+        $input['user_type_id'] = 2;
+
         if($validator->fails()){
             return $this->sendError('Validation Error.', $validator->errors());       
         }
    
-        $user_result           = User::create($user);
-         
+        $user = User::create($input);
+
+        $staffs['client_id']    = Auth::id();
+        $staffs['user_id']      = $user_id;
+        
+        Staff::create($staffs);
+   
+        return $this->sendResponse(new UserResource($user), 'Staff created successfully.');
+
 
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\Admin  $admin
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(Admin $admin)
     {
         //
         $user = User::find($id);
@@ -102,9 +131,8 @@ class ClientController extends Controller
     public function update(Request $request, Admin $admin)
     {
         //
-        $input          = $request->all();
-        $user           = new User();
-        $user_details   = new UserDetails();
+        $input = $request->all();
+        $user = new User();
 
         $validator = Validator::make($input, [
             'first_name' => 'required',
@@ -124,7 +152,6 @@ class ClientController extends Controller
         $user->user_type_id = $input['user_type_id'];
 
         $user->save();
-  
    
         return $this->sendResponse(new UserResource($user), 'User updated successfully.');
     }
@@ -143,6 +170,4 @@ class ClientController extends Controller
         return $this->sendResponse([], 'User deleted successfully.');
 
     }
-
-
 }

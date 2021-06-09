@@ -8,7 +8,7 @@
                 <h2>  </h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('clients') }}" title="Go back"> <i class="fas fa-backward "></i> </a>
+                <a class="btn btn-primary" href="{{ route('staffs') }}" title="Go back"> <i class="fas fa-backward "></i> </a>
             </div>
         </div>
     </div>
@@ -17,25 +17,25 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>First Name:</strong>
-                {{ isset( $client->user_info->first_name ) ?    $client->user_info->first_name : ''}}
+                {{ isset( $staff->user_info->first_name ) ?    $staff->user_info->first_name : ''}}
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Last Name:</strong>
-                {{ isset( $client->user_info->first_name ) ?    $client->user_info->first_name : ''}}
+                {{ isset( $staff->user_info->first_name ) ?    $staff->user_info->first_name : ''}}
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Email:</strong>
-                {{ isset( $client->user_info->email ) ? $client->user_info->email : '' }}   
+                {{ isset( $staff->user_info->email ) ? $staff->user_info->email : '' }}   
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Address:</strong>
-                {{ isset( $client->user_details->address ) ? $client->user_details->address : '' }}
+                {{ isset( $staff->user_details->address ) ? $staff->user_details->address : '' }}
             </div>
         </div>
     </div>

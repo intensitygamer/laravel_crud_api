@@ -29,10 +29,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 Route::group(
-    [   'namespace' => 'API',
-        //'middleware'=>'api', 
-        //'prefix' => 'auth', 
-    ],  function () {
+    [   
+        'namespace' => 'API',
+     ],  function () {
     
 
     Route::post('login', 'AuthController@login');
@@ -42,23 +41,24 @@ Route::group(
     //Route::group([  'middleware'=>'auth:api'], function() {
 
        // Route::post('user', 'UserController@store');
-        Route::get('users', 'UserController@index');
-        Route::get('user/{id}', 'UserController@show');
-        Route::put('user/{id}', 'UserController@update');
-        Route::delete('user/{id}', 'UserController@destroy');
-
-        Route::post('user', 'UserController@store');
-
-
-        Route::get('staffs', 'StaffController@index');
-        Route::post('staff', 'StaffController@store');
-        Route::get('staff/{id}', 'StaffController@show');
-        Route::put('staff/{id}', 'StaffController@update');
-        Route::delete('staff/{id}', 'StaffController@destroy');
        
-        Route::post('client', 'ClientController@store');
+        Route::get('users', 'User@index');
+        Route::get('user/{id}', 'User@show');
+        Route::put('user/{id}', 'User@update');
+        Route::delete('user/{id}', 'User@destroy');
+
+        Route::post('user', 'User@store');
+
+
+        Route::get('staffs', 'Staff@index');
+        Route::post('staff', 'Staff@store');
+        Route::get('staff/{id}', 'Staff@show');
+        Route::put('staff/{id}', 'Staff@update');
+        Route::delete('staff/{id}', 'Staff@destroy');
+       
+        Route::post('client', 'Client@store');
         
-        Route::get('admin', 'UserController@show_admins');
+        Route::get('admin', 'User@show_admins');
 
         Route::get('logout', 'AuthController@logout');
 

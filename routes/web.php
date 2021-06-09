@@ -103,11 +103,11 @@ Route::middleware('auth.basic')->group(function(){
 
         Route::get('create_staff',  [ 'as' => 'create_staff',        'uses' => 'StaffController@create_staff']);
         Route::post('save_staff',   [ 'as' => 'save_staff',          'uses' => 'StaffController@store']);
-        Route::get('edit_staff',    [ 'as' => 'edit_staff',          'uses' => 'StaffController@edit_staff']);
-        Route::post('update_staff', [ 'as' => 'update_staff',        'uses' => 'StaffController@update']);
+        Route::get('edit_staff',    [ 'as' => 'edit.staff',          'uses' => 'StaffController@edit']);
+        Route::post('update_staff', [ 'as' => 'update.staff',        'uses' => 'StaffController@update']);
         Route::get('staffs',        [ 'as' => 'staffs',              'uses' => 'StaffController@index']);
         Route::get('staffs_show',        [ 'as' => 'staff.show',    'uses' => 'StaffController@show']);
-        Route::delete('delete_staff/{id}', [ 'as' => 'delete_staff', 'uses' => 'StaffController@destroy']);
+        Route::delete('delete_staff/{id}', [ 'as' => 'delete.staff', 'uses' => 'StaffController@destroy']);
         Route::get('clients.dashboard', [ 'as' => 'clients.dashboard',  'uses' => 'ClientController@dashboard']);
 
     });

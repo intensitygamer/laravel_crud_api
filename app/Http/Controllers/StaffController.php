@@ -75,7 +75,7 @@ class StaffController extends Controller
 
         $user_details['user_id']        = $user_result->id ;
         $user_details['address']        = $input['address']  ;
-        $user_details['street']        = $input['street']  ;
+        $user_details['street']         = $input['street']  ;
         $user_details['house_no']       = $input['house_no'] ;
         $user_details['city']           = $input['city'] ;
         $user_details['territory']      = $input['territory'] ;
@@ -84,24 +84,28 @@ class StaffController extends Controller
  
         UserDetails::create($user_details);
 
-        return view('clients.index');
+        $staffs['client_id']    = Auth::id();
+        $staffs['user_id']      = $user_id;
+ 
+        Staff::create($staffs);
 
+        return redirect()->route('staffs')
+                        ->with('success','Staffs updated successfully');
+ 
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Client $client
+     * @param  \App\Models\Staff $staff 
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, Client $client)
-    {
-        //
-        
-        $clients = Client::find($request->id);       
-        
-        return view('clients.show', compact('client'));
+    
+    public function show(Request $request, $id){
 
+        $staff = Staff::find(['id' => $id])->first();       
+ 
+        return view('staffs.show', compact('staff'));
 
     }
 
@@ -131,7 +135,6 @@ class StaffController extends Controller
         if($validator->fails()){
 
             return view('clients.create')->with('errors', $validator->errors() );
-
         }
 
         $user_inputs['email']          = $input["email"];
@@ -156,8 +159,8 @@ class StaffController extends Controller
 
         //$client->update($request->all());
     
-        return redirect()->route('clients')
-                        ->with('success','Clients updated successfully');
+        return redirect()->route('staffs')
+                        ->with('success','Staffs updated successfully');
 
     }
 
@@ -171,11 +174,9 @@ class StaffController extends Controller
     public function edit(Request $request, User $user)
     {
 
-        //
-
-        $client = Client::find( $request->id ); 
+        $staff = Staff::find(['id' => $request->id])->first(); 
   
-        return view('clients.edit', compact('client'));
+        return view('staffs.edit', compact('staff'));
 
     }
 

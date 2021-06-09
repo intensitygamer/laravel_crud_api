@@ -4,77 +4,38 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\User;
 use App\Http\Controllers\API\BaseController as BaseController;
 use Validator;
+use App\Http\Resources\User as UserResource;
 use Illuminate\Support\Facades\Hash;
 
-use App\Models\User;
- 
-
-
-class StaffController extends Controller
+class User extends BaseController
 {
     //
-        /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-         
-        $staffs = User::where('user_type_id' , 4)->get();
- 
-        if (is_null($staffs)) {
-            return $this->sendError('User not found.');
-        }
 
-        return response(['staffs' => $staffs], 201);
+    public function index(){
 
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-        $input = $request->all();
-   
-        $validator = Validator::make($input, [
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'email' => 'required',
-            'password' => 'required'
-        ]);
         
-        $input['password'] = Hash::make($input['password']);
-        $input['user_type_id'] = 2;
+        //$user        = Auth::user();
+ 
+        // $users   = User::all("user_type_id", 2);
+ 
+         $users   = User::all();
+ 
+         return response(['users' => $users], 201);
+  
+     }
 
-        if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors());       
-        }
-   
-        $user = User::create($input);
-   
-        return $this->sendResponse(new UserResource($user), 'Staff created successfully.');
-
-
-    }
-
+     
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Admin  $admin
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Admin $admin)
+    public function show($id)
     {
-        //
         $user = User::find($id);
         
         if (is_null($user)) {
@@ -82,18 +43,52 @@ class StaffController extends Controller
         }
    
         return $this->sendResponse(new UserResource($user), 'User retrieved successfully.');
-    }
+    }   
+ 
+
+     /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+
+     public function store(Request $request)
+    {
+        $input = $request->all();
+
+        $validator = Validator::make($input, [
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'email' => 'required',
+            'password' => 'required'
+        ]);
+         
+        $user['password']       = Hash::make($input['password']);
+        $user['user_type_id']   = 2;
+        $user['first_name']     = $input['first_name'];
+        $user['last_name']      = $input['last_name'];
+        $user['email']          = $input['email'];
+         
+        if($validator->fails()){
+            return $this->sendError('Validation Error.', $validator->errors());       
+        }
+   
+        $user = User::create($user);
+        
+ 
+        //return $this->sendResponse(new UserResource($user), 'User created successfully.');
+    } 
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Admin  $admin
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Admin $admin)
+    public function update(Request $request, $id)
     {
-        //
         $input = $request->all();
         $user = new User();
 
@@ -107,30 +102,31 @@ class StaffController extends Controller
         if($validator->fails()){
             return $this->sendError('Validation Error.', $validator->errors());       
         }
+          
          
-        $user->email        = $input["email"];
-        $user->password     = $input['password'];
-        $user->first_name   = $input['first_name'];
-        $user->last_name    = $input['last_name'];
-        $user->user_type_id = $input['user_type_id'];
+        $user['password']       = $input["email"];
+        $user['user_type_id']   = $input['password'];
+        $user['first_name']     = $input['first_name'];
+        $user['last_name']      = $input['last_name'];
+        $user['email']          = $input['email'];
 
-        $user->save();
+
+        $user = User::where('id', $id)->update($user);
    
         return $this->sendResponse(new UserResource($user), 'User updated successfully.');
     }
 
-    /**
+ /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Admin  $admin
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Admin $admin)
+    public function destroy(User $user)
     {
-        //
         $user->delete();
    
         return $this->sendResponse([], 'User deleted successfully.');
-
     }
+
 }
