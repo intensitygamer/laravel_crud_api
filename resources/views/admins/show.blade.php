@@ -32,11 +32,31 @@
                 {{ isset( $client->user_info->email ) ? $client->user_info->email : '' }}   
             </div>
         </div>
+
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Address:</strong>
-                {{ isset( $client->user_details->address ) ? $client->user_details->address : '' }}
+                <strong>Street:</strong>
+                {{ isset( $client->user_details->street ) ? $client->user_details->street : '' }}
             </div>
         </div>
+
+
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>House No:</strong>
+                {{ isset( $client->user_details->house_no ) ? $client->user_details->house_no : '' }}
+            </div>
+        </div>
+        
+
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>City:</strong>
+                {{ isset( $client->user_details->city ) ? $client->user_details->city : '' }}
+            </div>
+        </div>
+
+
+
     </div>
 @endsection

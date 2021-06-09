@@ -11,6 +11,8 @@ use App\Models\User;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Activitylog\LogOptions;
 
+use App\Helpers\TokenHelper;
+
 class Client extends Model
 {
     use HasFactory, Notifiable, LogsActivity;
@@ -26,12 +28,31 @@ class Client extends Model
         'user_id',
         'name',    
         'crm_url',    
+        'crm_token_id',    
     ];
 
     protected static $logAttributes = [
         'name',    
         'crm_url',    
+         
     ];
+
+    public $incrementing = false;
+
+    protected static function boot(){
+
+        parent::boot();
+            
+        static::creating(function ($model) {
+                $model->crm_token_id = $model->crm_token_id();
+            });
+
+    }
+    
+    public function crm_token_id()
+    {
+        return TokenHelper::activationCode(array( 'length' => 12, 'alphanumeric' => false));
+    }
 
     public function user_info(){
 

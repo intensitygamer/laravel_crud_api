@@ -30,6 +30,25 @@
         }
 
     </style>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
+        
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+   
+
+    <script>
+        
+        $(document).ready( function () {
+             
+            $('.client_table').DataTable();
+
+            $('.activity_table').DataTable();
+        
+        });
+
+    </script>
 
 </head>
 
@@ -127,31 +146,6 @@
 
 
         <main class="py-4">
-
-        <div class='col col-12'>
-            
-            @if (!Auth::guest() && Auth::user()->user_type_id == 3) 
-                 
-                <h4> Client Info </h4>
-
-                <table class = 'table table-striped'> 
-                    
-                    <tr><td>    Client Name: <td> {{ Auth::user()->get_client_details(Auth::id())->name}}
-                    <tr><td>    CRM Url: <td> {{ Auth::user()->get_client_details(Auth::id())->crm_url}}
-                    
-                </table>
-
-                <form action = "schedeasy.com/" method = 'POST'> 
-                    
-                    <button type= 'submit' class = 'btn btn-info'> Login through CRM </button>
-
-                     @csrf
-    
-                </form>
-
-            @endif  
-            
-        </div>
 
             @yield('content')
 

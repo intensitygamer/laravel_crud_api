@@ -48,7 +48,7 @@ class AuthController extends Controller
                  
                 $request->session()->put('client_info', $client);
 
-                return redirect()->to('staffs');
+                return redirect()->to('clients.dashboard');
             
             }
             
@@ -144,7 +144,7 @@ class AuthController extends Controller
 
             auth()->login($existingUser, true);
             
-            return redirect()->to('staffs');  
+            return redirect()->to('clients.dashboard');  
 
         } else {
 

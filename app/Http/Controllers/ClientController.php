@@ -2,14 +2,30 @@
 
 namespace App\Http\Controllers;
 
+
+ 
 use App\Models\User;
+use App\Models\Activity;
 use App\Models\Client;
+use App\Models\Staff;
 use App\Models\UserDetails;
 use Illuminate\Http\Request;
 use Validator;
+use Hash;
+
 
 class ClientController extends Controller
 {   
+
+    public function dashboard(Request $request)
+    {
+        $staffs = Staff::get();
+
+        return view('clients.dashboard')->with('staffs', $staffs);
+
+    }
+ 
+
     /**
      * Display a listing of the resource.
      *
@@ -58,7 +74,7 @@ class ClientController extends Controller
         if($validator->fails()){
  
 
-            return redirect()->route('clients.create')
+            return redirect()->route('client.create')
             ->with('errors', $validator->errors() );
 
         }
@@ -83,6 +99,13 @@ class ClientController extends Controller
  
         UserDetails::create($user_details);
 
+
+        $client_info['crm_url']        = $input['crm_url'];
+
+        $client_info['user_id']        = $user_id;
+
+        Client::create($client_info);
+
         return redirect()->route('clients')
                         ->with('success','Clients added successfully');
 
@@ -94,13 +117,13 @@ class ClientController extends Controller
      * @param  \App\Models\Client $client
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, Client $client)
-    {
-        //
+    public function show(Request $request, $id){
+
+        $client_info = Client::where(['id' => $request->id])->first();       
         
-        $clients = Client::find($request->id);       
-        
-        return view('clients.show', compact('client'));
+        $activities = Activity::where(['causer_id' => $client_info->user_id])->orderBy('id', 'DESC')->get();
+ 
+        return view('clients.show', compact('client_info', 'activities'));
 
 
     }
@@ -124,8 +147,6 @@ class ClientController extends Controller
                             'email' => 'required',
                         ]);
        
-        
-        //$user_details   = new UserDetails();
         $user           = new User();
   
         if($validator->fails()){
@@ -142,9 +163,6 @@ class ClientController extends Controller
         
         $user = User::where('id', $request->user_id)->first();
 
-        // $user_result                   = User::create($user_updates);
-        // $user_id                       = $user_result->id;
-    
 
         $user_details['address']        = $input['address']  ;
         $user_details['street']         = $input['street']  ;

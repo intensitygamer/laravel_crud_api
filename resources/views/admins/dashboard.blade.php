@@ -12,9 +12,6 @@
                     
                     <tr><td>    Client Name: <td> {{ Auth::user()->get_client_details(Auth::id())->name}}
                     <tr><td>    CRM Url: <td> {{ Auth::user()->get_client_details(Auth::id())->crm_url}}
-
-
-                    <input type='hidden' value="{{ Auth::user()->get_client_details(Auth::id())->crm_token_id}}" name = "crm_token_id" >
                     
                 </table>
 

@@ -82,17 +82,18 @@ Route::middleware('auth.basic')->group(function(){
 
     /* Client */
 
-        Route::get('create_client', [ 'as' => 'create_client',  'uses' => 'ClientController@create_client']);
+        Route::get('create_client', [ 'as' => 'client.create',  'uses' => 'ClientController@create_client']);
         Route::post('save_client', [ 'as' => 'save_client',     'uses' => 'ClientController@store']);
         Route::get('client/{id}', [ 'as' => 'edit.client',      'uses' => 'ClientController@edit']);
         Route::post('update.client', [ 'as' => 'update.client', 'uses' => 'ClientController@update']);
         Route::get('clients', [ 'as' => 'clients',              'uses' => 'ClientController@index']);
-        Route::get('clients_show', [ 'as' => 'clients.show',    'uses' => 'ClientController@show']);
+        Route::get('clients_show/{id}', [ 'as' => 'clients.show',    'uses' => 'ClientController@show']);
         Route::delete('delete.client', [ 'as' => 'delete.client', 'uses' => 'ClientController@destroy']);
         Route::get('client_change_password/{id}', [ 'as' => 'client.change_password',   'uses' => 'ClientController@change_password']);
         Route::post('client_change_password', [ 'as' => 'client_change_password',   'uses' => 'ClientController@update_password']);
 
         Route::get('actvity', [ 'as' => 'activity',              'uses' => 'ActivityController@index']);
+       
 
     });
 
@@ -107,8 +108,9 @@ Route::middleware('auth.basic')->group(function(){
         Route::get('staffs',        [ 'as' => 'staffs',              'uses' => 'StaffController@index']);
         Route::get('staffs_show',        [ 'as' => 'staff.show',    'uses' => 'StaffController@show']);
         Route::delete('delete_staff/{id}', [ 'as' => 'delete_staff', 'uses' => 'StaffController@destroy']);
+        Route::get('clients.dashboard', [ 'as' => 'clients.dashboard',  'uses' => 'ClientController@dashboard']);
 
-     });
+    });
 
     /* Master Admin */
 

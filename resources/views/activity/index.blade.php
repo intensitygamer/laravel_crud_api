@@ -17,7 +17,7 @@
         </div>
     @endif
 
-    <table class="table table-bordered table-responsive-lg">
+    <table class="table table-bordered table-responsive-lg activity_table">
         <tr>
             <th>Actvity</th>
             <th>Log Name</th>

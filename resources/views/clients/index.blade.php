@@ -7,21 +7,21 @@
                 <h2> Clients </h2>
             </div>
             <div class="pull-left">
-                <a class="btn btn-info" href="{{ route('create_client') }}" title="Create a client"> Create a client <i class="fas fa-plus-circle"></i>
-                    </a>
+                <a class="btn btn-info" href="{{ route('client.create') }}" title="Create a client"> Create a client <i class="fas fa-plus-circle"></i>
+                </a>
             </div>
 
 
          </div>
     </div>
-
+    
     @if ($message = Session::get('success'))
         <div class="alert alert-success">
             <p>{{ $message }}</p>
         </div>
     @endif
 
-    <table class="table table-bordered table-responsive-lg">
+    <table class="table table-bordered table-responsive-lg client_table">
         <tr>
             <th>Client ID</th>
             <th>Name</th>
