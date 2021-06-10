@@ -47,30 +47,52 @@ class Client extends Controller
      */
     public function store(Request $request)
     {
-        //
-        $input = $request->all();
-   
+  
+        $input          = $request->all();
+        $user           = new User();
+ 
+
         $validator = Validator::make($input, [
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'email' => 'required',
-            'password' => 'required'
+            'first_name'    => 'required',
+            'last_name'     => 'required',
+            'email'         => 'required|unique:users',
+            'password'      => 'required'
         ]);
         
-        $user['password']       = Hash::make($input['password']);
-        $user['user_type_id']   = 2;
-        $user['first_name']     = $input['first_name'];
-        $user['last_name']      = $input['last_name'];
-        $user['email']          = $input['email'];
-        
-
-    
         if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors());       
+ 
+            return redirect()->route('client.create')
+            ->with('errors', $validator->errors() );
+
         }
-   
-        $user_result           = User::create($user);
-         
+
+        $user_updates['email']          = $input["email"];
+        $user_updates['password']       = Hash::make($input['password']);
+        $user_updates['first_name']     = $input['first_name'];
+        $user_updates['last_name']      = $input['last_name'];
+        $user_updates['user_type_id']   = 2;
+
+        $user_result                   = User::create($user_updates);
+        $user_id                       = $user_result->id;
+
+        $user_details['user_id']        = $user_result->id ;
+        $user_details['address']        = $input['address']  ;
+        $user_details['street']         = $input['street']  ;
+        $user_details['house_no']       = $input['house_no'] ;
+        $user_details['city']           = $input['city'] ;
+        $user_details['territory']      = $input['territory'] ;
+        $user_details['postal_code']    = $input['postal_code'] ;
+        $user_details['country']        = $input['country'] ;
+ 
+        UserDetails::create($user_details);
+
+        $client_info['crm_url']        = $input['crm_url'];
+
+        $client_info['user_id']        = $user_id;
+
+        Client::create($client_info);
+
+        return $this->sendResponse(new ClientResource($client_info), 'Client Added successfully.');
 
     }
 

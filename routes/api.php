@@ -49,6 +49,11 @@ Route::group(
 
         Route::post('user', 'User@store');
 
+        Route::post('create_admin', 'AdminController@store');
+        Route::post('create_staff', 'AdminController@store');
+        Route::post('create_admin', 'AdminController@store');
+        Route::post('create_admin', 'AdminController@store');
+  
 
         Route::get('staffs', 'Staff@index');
         Route::post('staff', 'Staff@store');

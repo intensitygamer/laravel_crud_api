@@ -46,7 +46,6 @@ class AdminController extends Controller
         //
 
         $input          = $request->all();
-        //$user_details   = new UserDetails();
         $user           = new User();
  
 

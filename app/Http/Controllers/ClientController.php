@@ -57,10 +57,8 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        //
 
         $input          = $request->all();
-        //$user_details   = new UserDetails();
         $user           = new User();
  
 
