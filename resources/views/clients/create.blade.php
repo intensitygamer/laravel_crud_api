@@ -113,6 +113,13 @@
                 </div>
             </div>
 
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Client Name:</strong>   
+                    <input type="text" name="client_name" class="form-control" placeholder="Client Name">
+                </div>
+            </div>
+
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                 <button type="submit" class="btn btn-primary">Create Client</button>
             </div>

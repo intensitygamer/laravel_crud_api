@@ -49,11 +49,12 @@ Route::group(
 
         Route::post('user', 'User@store');
 
-        Route::post('create_admin', 'AdminController@store');
-        Route::post('create_staff', 'AdminController@store');
-        Route::post('create_admin', 'AdminController@store');
-        Route::post('create_admin', 'AdminController@store');
-  
+        Route::post('create_admin', 'AdminAPI@store');
+        Route::post('create_staff', 'StaffAPI@store');
+        
+        
+        Route::post('create_client', 'ClientAPI@store');
+   
 
         Route::get('staffs', 'Staff@index');
         Route::post('staff', 'Staff@store');
@@ -61,7 +62,6 @@ Route::group(
         Route::put('staff/{id}', 'Staff@update');
         Route::delete('staff/{id}', 'Staff@destroy');
        
-        Route::post('client', 'Client@store');
         
         Route::get('admin', 'User@show_admins');
 

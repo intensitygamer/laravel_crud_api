@@ -82,9 +82,9 @@
 
                         @csrf
 
-                        <a class="btn btn-info" href="{{ route('staff.show', $staff->id) }}">View</a>    
+                        <a class="btn btn-info" href="{{ route('staff.show', $staff->id) }}"> View</a>    
 
-                        <a class="btn btn-primary"  href="{{ route('edit.staff', $staff->id) }}">Edit</a>
+                        <a class="btn btn-primary"  href="{{ route('edit.staff', $staff->id) }}"> Edit</a>
                                 
                             <input name="id" type="hidden" name = "staff_id" value="{{$staff->id}}">
 
@@ -94,7 +94,7 @@
 
                         </form>
 
-                        <br><br><a class="btn btn-success"  href="{{ route('client.change_password', $staff->id) }}">Change Password</a>   
+                        <br><br><a class="btn btn-success"  href="{{ route('client.change_password', $staff->id) }}"> Change Password</a>   
 
                 </td>
             </tr>
